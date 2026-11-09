@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RUVIK · Conocimiento que conecta</title>
+  <meta name="description" content="RUVIK: un ecosistema digital para organizar, consultar, compartir y reutilizar recursos educativos. UNIAJC Virtual.">
+  <meta name="theme-color" content="#23184c">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Outfit:wght@300;400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===================== Header ===================== -->
+  <header class="site-header on-dark" id="inicio">
+    <div class="container site-header__inner">
+      <div class="site-header__left">
+        <button class="header-btn header-btn--outlined" type="button" id="menu-toggle" aria-expanded="false" aria-controls="menu">
+          <img class="header-btn__icon" src="assets/icons/menu.svg" width="22" height="22" alt="">
+          <span class="header-btn__label t-label-button">Menú</span>
+        </button>
+        <div class="site-header__logos">
+          <img class="site-header__logo-uniajc" src="assets/logos/uniajc-virtual.svg" width="158" height="44" alt="UNIAJC Virtual">
+          <span class="site-header__divider" aria-hidden="true"></span>
+          <a href="#inicio" aria-label="RUVIK, ir al inicio">
+            <img src="assets/logos/ruvik.svg" width="130" height="44" alt="">
+          </a>
+        </div>
+      </div>
+
+      <div class="search-group">
+        <a class="header-btn header-btn--segment" href="#" aria-label="Buscar">
+          <img class="header-btn__icon" src="assets/icons/search.svg" width="20" height="20" alt="">
+          <span class="header-btn__label t-label-button" aria-hidden="true">Buscar</span>
+        </a>
+        <span class="search-group__divider" aria-hidden="true"></span>
+        <a class="header-btn header-btn--segment search-group__advanced" href="#">
+          <span class="t-label-button">Búsqueda avanzada</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <!-- ===================== Hero + Contenido sorpresa ===================== -->
+    <div class="container hero-section">
+      <section class="hero on-dark" aria-roledescription="carrusel" aria-label="Presentación de RUVIK">
+        <div class="hero__body">
+          <div class="hero__slides">
+            <div class="hero__slide is-active" role="group" aria-roledescription="diapositiva" aria-label="1 de 4">
+              <div class="hero__copy">
+                <div class="hero__titleblock">
+                  <p class="hero__eyebrow t-heading-eyebrow"><span class="hero__marker" aria-hidden="true"></span>RUVIK</p>
+                  <h1 class="hero__title t-display-h1">¿Qué es RUVIK?</h1>
+                </div>
+                <p class="hero__text t-body-lead">Un ecosistema digital para organizar, consultar, compartir y reutilizar recursos educativos.</p>
+              </div>
+              <a class="btn-cta t-label-cta" href="#">Conocer +</a>
+            </div>
+
+            <div class="hero__slide" role="group" aria-roledescription="diapositiva" aria-label="2 de 4">
+              <div class="hero__copy">
+                <div class="hero__titleblock">
+                  <p class="hero__eyebrow t-heading-eyebrow"><span class="hero__marker" aria-hidden="true"></span>RUVIK</p>
+                  <h2 class="hero__title t-display-h1">Diapositiva 2</h2>
+                </div>
+                <p class="hero__text t-body-lead">Texto por definir para esta diapositiva.</p>
+              </div>
+              <a class="btn-cta t-label-cta" href="#">Conocer +</a>
+            </div>
+
+            <div class="hero__slide" role="group" aria-roledescription="diapositiva" aria-label="3 de 4">
+              <div class="hero__copy">
+                <div class="hero__titleblock">
+                  <p class="hero__eyebrow t-heading-eyebrow"><span class="hero__marker" aria-hidden="true"></span>RUVIK</p>
+                  <h2 class="hero__title t-display-h1">Diapositiva 3</h2>
+                </div>
+                <p class="hero__text t-body-lead">Texto por definir para esta diapositiva.</p>
+              </div>
+              <a class="btn-cta t-label-cta" href="#">Conocer +</a>
+            </div>
+
+            <div class="hero__slide" role="group" aria-roledescription="diapositiva" aria-label="4 de 4">
+              <div class="hero__copy">
+                <div class="hero__titleblock">
+                  <p class="hero__eyebrow t-heading-eyebrow"><span class="hero__marker" aria-hidden="true"></span>RUVIK</p>
+                  <h2 class="hero__title t-display-h1">Diapositiva 4</h2>
+                </div>
+                <p class="hero__text t-body-lead">Texto por definir para esta diapositiva.</p>
+              </div>
+              <a class="btn-cta t-label-cta" href="#">Conocer +</a>
+            </div>
+          </div>
+
+          <div class="hero__dots" role="group" aria-label="Elegir diapositiva">
+            <button class="hero__dot" type="button" aria-label="Diapositiva 1" aria-current="true"></button>
+            <button class="hero__dot" type="button" aria-label="Diapositiva 2"></button>
+            <button class="hero__dot" type="button" aria-label="Diapositiva 3"></button>
+            <button class="hero__dot" type="button" aria-label="Diapositiva 4"></button>
+          </div>
+        </div>
+
+        <div class="hero__mosaics" aria-hidden="true">
+          <div class="hero__mosaic mosaic is-active">
+            <span class="cell"></span><span class="cell c-lilac cell--bl"></span><span class="cell c-yellow"></span>
+            <span class="cell c-cyan"></span><span class="cell c-red-orange cell--tr"></span><span class="cell c-pink cell--br"></span>
+            <span class="cell c-mint cell--tl"></span><span class="cell c-orange"></span><span class="cell c-violet"></span>
+          </div>
+          <div class="hero__mosaic mosaic">
+            <span class="cell"></span><span class="cell c-red-orange cell--bl"></span><span class="cell c-pink"></span>
+            <span class="cell c-mint"></span><span class="cell c-orange cell--tr"></span><span class="cell c-violet cell--br"></span>
+            <span class="cell c-lilac cell--tl"></span><span class="cell c-yellow"></span><span class="cell c-cyan"></span>
+          </div>
+          <div class="hero__mosaic mosaic">
+            <span class="cell"></span><span class="cell c-orange cell--bl"></span><span class="cell c-violet"></span>
+            <span class="cell c-lilac"></span><span class="cell c-yellow cell--tr"></span><span class="cell c-cyan cell--br"></span>
+            <span class="cell c-red-orange cell--tl"></span><span class="cell c-pink"></span><span class="cell c-mint"></span>
+          </div>
+          <div class="hero__mosaic mosaic">
+            <span class="cell"></span><span class="cell c-yellow cell--bl"></span><span class="cell c-cyan"></span>
+            <span class="cell c-red-orange"></span><span class="cell c-pink cell--tr"></span><span class="cell c-mint cell--br"></span>
+            <span class="cell c-orange cell--tl"></span><span class="cell c-violet"></span><span class="cell c-lilac"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="surprise" id="sorpresa" aria-labelledby="sorpresa-title">
+        <div class="surprise__heading">
+          <h2 class="t-heading-section" id="sorpresa-title">Contenido sorpresa</h2>
+          <p class="surprise__sub t-body-small">Se muestra al azar cada visita</p>
+        </div>
+        <div class="surprise__tiles">
+          <a class="tile tile--violet" href="#" data-random="any">
+            <span class="tile__icon"><img src="assets/icons/shuffle-violet.svg" width="20" height="20" alt=""></span>
+            <span class="tile__label t-body-tile">Recurso o autor al azar</span>
+          </a>
+          <a class="tile tile--yellow" href="#" data-random="resource">
+            <span class="tile__label t-body-tile">Recurso al azar</span>
+            <span class="tile__icon"><img src="assets/icons/shuffle-yellow.svg" width="20" height="20" alt=""></span>
+          </a>
+          <a class="tile tile--mint" href="#" data-random="author">
+            <span class="tile__label t-body-tile">Autor al azar</span>
+            <span class="tile__icon"><img src="assets/icons/shuffle-mint.svg" width="20" height="20" alt=""></span>
+          </a>
+        </div>
+      </section>
+    </div>
+
+    <!-- ===================== FAQ · Noticias · Experiencias ===================== -->
+    <div class="container content-grid">
+      <section class="content-block content-block--faq" id="faq" aria-labelledby="faq-title">
+        <h2 class="section-title" id="faq-title">
+          <span class="section-title__marker cell c-violet cell--tr" aria-hidden="true"></span>
+          <span class="section-title__text t-heading-section">Preguntas frecuentes</span>
+        </h2>
+        <div class="faq">
+          <div class="faq__item">
+            <h3>
+              <button class="faq__button" type="button" aria-expanded="false" aria-controls="faq-1">
+                <span class="faq__question t-body-faq">¿Puedo usar los recursos en cualquier clase?</span>
+                <img class="faq__icon faq__icon--plus" src="assets/icons/plus.svg" width="22" height="22" alt="">
+                <img class="faq__icon faq__icon--minus" src="assets/icons/minus.svg" width="22" height="22" alt="">
+              </button>
+            </h3>
+            <div class="faq__answer t-body-default" id="faq-1" hidden>
+              <p>Respuesta por definir.</p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <h3>
+              <button class="faq__button" type="button" aria-expanded="false" aria-controls="faq-2">
+                <span class="faq__question t-body-faq">¿Cómo sé si un recurso es de calidad?</span>
+                <img class="faq__icon faq__icon--plus" src="assets/icons/plus.svg" width="22" height="22" alt="">
+                <img class="faq__icon faq__icon--minus" src="assets/icons/minus.svg" width="22" height="22" alt="">
+              </button>
+            </h3>
+            <div class="faq__answer t-body-default" id="faq-2" hidden>
+              <p>Respuesta por definir.</p>
+            </div>
+          </div>
+          <div class="faq__item">
+            <h3>
+              <button class="faq__button" type="button" aria-expanded="false" aria-controls="faq-3">
+                <span class="faq__question t-body-faq">¿Cómo subo un recurso que yo creé?</span>
+                <img class="faq__icon faq__icon--plus" src="assets/icons/plus.svg" width="22" height="22" alt="">
+                <img class="faq__icon faq__icon--minus" src="assets/icons/minus.svg" width="22" height="22" alt="">
+              </button>
+            </h3>
+            <div class="faq__answer t-body-default" id="faq-3" hidden>
+              <p>Respuesta por definir.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-block" id="noticias" aria-labelledby="noticias-title">
+        <h2 class="section-title" id="noticias-title">
+          <span class="section-title__marker cell c-orange cell--bl" aria-hidden="true"></span>
+          <span class="section-title__text t-heading-section">Noticias</span>
+        </h2>
+        <ul class="card-list">
+          <li>
+            <a class="card-news" href="#">
+              <div class="card-news__image mosaic" aria-hidden="true">
+                <span class="cell c-violet"></span><span class="cell c-cyan cell--tr"></span><span class="cell c-yellow"></span>
+              </div>
+              <div class="card-news__row">
+                <h3 class="card-news__title t-body-card-title">Titular de noticia 1</h3>
+                <span class="arrow" aria-hidden="true">
+                  <img class="arrow__default" src="assets/icons/arrow.svg" width="22" height="22" alt="">
+                  <img class="arrow__hover" src="assets/icons/arrow-hover.svg" width="22" height="22" alt="">
+                </span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="card-news" href="#">
+              <div class="card-news__image mosaic" aria-hidden="true">
+                <span class="cell c-red-orange cell--bl"></span><span class="cell c-lilac"></span><span class="cell c-mint cell--br"></span>
+              </div>
+              <div class="card-news__row">
+                <h3 class="card-news__title t-body-card-title">Titular de noticia 2</h3>
+                <span class="arrow" aria-hidden="true">
+                  <img class="arrow__default" src="assets/icons/arrow.svg" width="22" height="22" alt="">
+                  <img class="arrow__hover" src="assets/icons/arrow-hover.svg" width="22" height="22" alt="">
+                </span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="content-block" id="experiencias" aria-labelledby="experiencias-title">
+        <h2 class="section-title" id="experiencias-title">
+          <span class="section-title__marker cell c-cyan cell--tl" aria-hidden="true"></span>
+          <span class="section-title__text t-heading-section">Experiencias de creación o apropiación</span>
+        </h2>
+        <ul class="card-list">
+          <li>
+            <a class="card-news" href="#">
+              <div class="card-news__image mosaic" aria-hidden="true">
+                <span class="cell c-mint"></span><span class="cell c-pink cell--tl"></span><span class="cell c-blue"></span>
+              </div>
+              <div class="card-news__row">
+                <h3 class="card-news__title t-body-card-title">Experiencia 1</h3>
+                <span class="arrow" aria-hidden="true">
+                  <img class="arrow__default" src="assets/icons/arrow.svg" width="22" height="22" alt="">
+                  <img class="arrow__hover" src="assets/icons/arrow-hover.svg" width="22" height="22" alt="">
+                </span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="card-news" href="#">
+              <div class="card-news__image mosaic" aria-hidden="true">
+                <span class="cell c-yellow cell--tr"></span><span class="cell c-cyan"></span><span class="cell c-violet cell--bl"></span>
+              </div>
+              <div class="card-news__row">
+                <h3 class="card-news__title t-body-card-title">Experiencia 2</h3>
+                <span class="arrow" aria-hidden="true">
+                  <img class="arrow__default" src="assets/icons/arrow.svg" width="22" height="22" alt="">
+                  <img class="arrow__hover" src="assets/icons/arrow-hover.svg" width="22" height="22" alt="">
+                </span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- ===================== Colecciones ===================== -->
+    <section class="collections" id="colecciones" aria-labelledby="colecciones-title">
+      <div class="container">
+        <h2 class="section-title" id="colecciones-title">
+          <span class="section-title__marker cell c-pink cell--br" aria-hidden="true"></span>
+          <span class="section-title__text t-heading-section">Colecciones</span>
+        </h2>
+        <ul class="collections__grid">
+          <li>
+            <a class="card-collection" href="#">
+              <div class="card-collection__image mosaic" aria-hidden="true">
+                <span class="cell c-yellow cell--bl"></span><span class="cell c-orange"></span><span class="cell c-red-orange cell--tr"></span><span class="cell"></span>
+                <span class="cell"></span><span class="cell c-yellow"></span><span class="cell c-pink cell--br"></span><span class="cell c-orange cell--tr"></span>
+              </div>
+              <div class="card-collection__text">
+                <h3 class="card-collection__title t-heading-collection">Colección 1</h3>
+                <span class="card-collection__desc t-body-default">Texto descriptivo de la colección</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="card-collection" href="#">
+              <div class="card-collection__image mosaic" aria-hidden="true">
+                <span class="cell"></span><span class="cell c-mint cell--bl"></span><span class="cell c-cyan"></span><span class="cell c-violet cell--tr"></span>
+                <span class="cell c-lilac cell--tl"></span><span class="cell c-violet"></span><span class="cell c-mint cell--br"></span><span class="cell"></span>
+              </div>
+              <div class="card-collection__text">
+                <h3 class="card-collection__title t-heading-collection">Colección 2</h3>
+                <span class="card-collection__desc t-body-default">Texto descriptivo de la colección</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== Footer ===================== -->
+  <footer class="site-footer on-dark" id="contacto">
+    <div class="container site-footer__main">
+      <div class="site-footer__info">
+        <div class="site-footer__brand">
+          <img src="assets/logos/ruvik.svg" width="154" height="52" alt="RUVIK">
+          <p class="site-footer__tagline t-body-tagline">Conocimiento que conecta</p>
+        </div>
+        <div class="site-footer__contact">
+          <h2 class="t-heading-section">Info de contacto</h2>
+          <address class="site-footer__lines t-body-contact">
+            <a class="site-footer__mail" href="mailto:recursosruvik@uniajc.edu.co">recursosruvik@uniajc.edu.co</a>
+            <span>Santiago de Cali, Colombia</span>
+          </address>
+        </div>
+      </div>
+      <div class="site-footer__mosaic mosaic" aria-hidden="true">
+        <span class="cell c-yellow"></span><span class="cell c-orange"></span><span class="cell c-red-orange cell--tr"></span>
+        <span class="cell c-mint cell--bl"></span><span class="cell"></span><span class="cell c-pink cell--br"></span>
+        <span class="cell c-cyan"></span><span class="cell c-lilac cell--bl"></span><span class="cell c-violet"></span>
+      </div>
+    </div>
+    <div class="container site-footer__bottom">
+      <div class="site-footer__logos">
+        <img src="assets/logos/institucional.png" width="74" height="32" alt="Institución Universitaria Antonio José Camacho">
+        <img src="assets/logos/uniajc-virtual.svg" width="115" height="32" alt="UNIAJC Virtual">
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== Menú lateral ===================== -->
+  <div class="menu on-dark" id="menu" hidden>
+    <button class="menu__scrim" type="button" tabindex="-1" aria-label="Cerrar menú" data-menu-close></button>
+    <div class="menu__panel" role="dialog" aria-modal="true" aria-labelledby="menu-title">
+      <div class="menu__top">
+        <h2 class="t-heading-section" id="menu-title">Menú</h2>
+        <button class="menu__close" type="button" aria-label="Cerrar menú" data-menu-close>
+          <img src="assets/icons/close.svg" width="22" height="22" alt="">
+        </button>
+      </div>
+      <nav aria-label="Principal">
+        <ul class="menu__items">
+          <li><a class="menu__link t-body-faq" href="#inicio">Inicio</a></li>
+          <li><a class="menu__link t-body-faq" href="#sorpresa">Contenido sorpresa</a></li>
+          <li><a class="menu__link t-body-faq" href="#faq">Preguntas frecuentes</a></li>
+          <li><a class="menu__link t-body-faq" href="#noticias">Noticias</a></li>
+          <li><a class="menu__link t-body-faq" href="#experiencias">Experiencias</a></li>
+          <li><a class="menu__link t-body-faq" href="#colecciones">Colecciones</a></li>
+          <li><a class="menu__link t-body-faq" href="#contacto">Contacto</a></li>
+          <li class="menu__item--mobile"><a class="menu__link t-body-faq" href="#">Búsqueda avanzada</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,423 @@
+/* ==========================================================================
+   RUVIK · Componentes (Figma → página Componentes)
+   ========================================================================== */
+
+/* ---------- Mosaic/Cell ----------
+   Forma por modificador, color por clase c-*. */
+.cell {
+  aspect-ratio: 1;
+  background: var(--cell-color, transparent);
+}
+
+.cell--tl { border-top-left-radius: var(--radius-pill); }
+.cell--tr { border-top-right-radius: var(--radius-pill); }
+.cell--br { border-bottom-right-radius: var(--radius-pill); }
+.cell--bl { border-bottom-left-radius: var(--radius-pill); }
+
+.c-navy       { --cell-color: var(--brand-navy); }
+.c-violet     { --cell-color: var(--brand-violet); }
+.c-yellow     { --cell-color: var(--brand-yellow); }
+.c-mint       { --cell-color: var(--brand-mint); }
+.c-cyan       { --cell-color: var(--brand-cyan); }
+.c-orange     { --cell-color: var(--brand-orange); }
+.c-pink       { --cell-color: var(--brand-pink); }
+.c-lilac      { --cell-color: var(--brand-lilac); }
+.c-red-orange { --cell-color: var(--brand-red-orange); }
+.c-blue       { --cell-color: var(--brand-blue); }
+
+/* Mosaico genérico en rejilla */
+.mosaic {
+  display: grid;
+  grid-template-columns: repeat(var(--mosaic-cols, 3), var(--mosaic-cell, 1fr));
+  gap: var(--mosaic-gap, var(--space-4));
+}
+
+/* ---------- Header/Button ---------- */
+.header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-10);
+  height: var(--header-control-h);
+  color: var(--neutral-white);
+  white-space: nowrap;
+  transition: background-color var(--duration-fast) var(--ease);
+}
+
+.header-btn:hover {
+  background-color: var(--neutral-white-12);
+}
+
+.header-btn__icon {
+  flex-shrink: 0;
+}
+
+/* Type=Outlined */
+.header-btn--outlined {
+  padding-inline: var(--space-18);
+  border: 1px solid var(--neutral-white);
+  border-radius: var(--radius-14);
+  background-color: var(--brand-navy);
+}
+
+.header-btn--outlined:hover {
+  background-color: var(--neutral-white-12);
+}
+
+.header-btn--outlined:focus-visible {
+  outline-offset: 4px;
+}
+
+/* Type=Segment (dentro de .search-group) */
+.search-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--neutral-white);
+  border-radius: var(--radius-pill);
+}
+
+.search-group__divider {
+  width: 1px;
+  height: 22px;
+  background: var(--neutral-white);
+  flex-shrink: 0;
+}
+
+.header-btn--segment {
+  padding-inline: var(--space-22);
+}
+
+.header-btn--segment:first-child {
+  border-radius: var(--radius-pill) 0 0 var(--radius-pill);
+}
+
+.header-btn--segment:last-child {
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+}
+
+/* ---------- Button/CTA ----------
+   Hover y Focus: no se pudieron leer de Figma (límite de API). Propuesta:
+   hover un poco más claro con elevación; focus con anillo amarillo. */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  height: 50px;
+  padding-inline: var(--space-28);
+  border-radius: var(--radius-pill);
+  background: var(--brand-yellow);
+  color: var(--brand-navy);
+  white-space: nowrap;
+  transition:
+    background-color var(--duration-fast) var(--ease),
+    transform var(--duration-fast) var(--ease);
+}
+
+.btn-cta:hover {
+  background: color-mix(in srgb, var(--brand-yellow) 85%, var(--neutral-white));
+  transform: translateY(-2px);
+}
+
+.btn-cta:focus-visible {
+  outline-offset: 4px;
+}
+
+/* ---------- Section title ---------- */
+.section-title {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  color: var(--brand-navy);
+}
+
+.section-title__marker {
+  flex-shrink: 0;
+  width: 16px;
+  margin-top: 4px;
+}
+
+.section-title__text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- Tile (Contenido sorpresa) ---------- */
+.tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 198px;
+  padding: var(--space-22);
+  overflow: hidden;
+  transition: transform var(--duration-fast) var(--ease);
+}
+
+.tile:hover {
+  transform: translateY(var(--tile-lift));
+}
+
+.tile:focus-visible {
+  outline-color: var(--brand-blue);
+  outline-offset: 3px;
+}
+
+.tile__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  flex-shrink: 0;
+}
+
+.tile--violet {
+  padding-inline: var(--space-26);
+  background: var(--brand-violet);
+  color: var(--neutral-white);
+  border-top-right-radius: var(--radius-150);
+}
+
+.tile--violet .tile__icon {
+  background: var(--neutral-white);
+}
+
+.tile--yellow {
+  background: var(--brand-yellow);
+  color: var(--brand-navy);
+  border-bottom-left-radius: var(--radius-150);
+}
+
+.tile--yellow .tile__icon {
+  align-self: flex-end;
+}
+
+.tile--mint {
+  background: var(--brand-mint);
+  color: var(--brand-navy);
+  border-bottom-right-radius: var(--radius-150);
+}
+
+.tile--yellow .tile__icon,
+.tile--mint .tile__icon {
+  background: var(--brand-navy);
+}
+
+/* ---------- FAQ/Item ---------- */
+.faq {
+  border-top: 1px solid var(--neutral-divider);
+}
+
+.faq__item {
+  border-bottom: 1px solid var(--neutral-divider);
+}
+
+.faq__button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  width: 100%;
+  padding-block: var(--space-20);
+  text-align: left;
+  color: var(--brand-navy);
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.faq__button:hover {
+  color: var(--brand-violet);
+}
+
+.faq__question {
+  flex: 1;
+  min-width: 0;
+}
+
+.faq__icon {
+  flex-shrink: 0;
+}
+
+.faq__icon--minus,
+.faq__button[aria-expanded="true"] .faq__icon--plus {
+  display: none;
+}
+
+.faq__button[aria-expanded="true"] .faq__icon--minus {
+  display: block;
+}
+
+.faq__answer {
+  padding-bottom: var(--space-20);
+  color: var(--neutral-text-secondary);
+}
+
+/* ---------- Card/News ---------- */
+.card-news {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-14);
+  color: var(--brand-navy);
+}
+
+.card-news__image {
+  --mosaic-cols: 3;
+  background: var(--surface-mosaic);
+}
+
+.card-news__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+}
+
+.card-news__title {
+  flex: 1;
+  min-width: 0;
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.arrow {
+  position: relative;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+}
+
+.arrow img {
+  position: absolute;
+  inset: 0;
+  transition: opacity var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
+}
+
+.arrow__hover {
+  opacity: 0;
+}
+
+.card-news:hover .card-news__title,
+.card-collection:hover .card-collection__title {
+  color: var(--brand-violet);
+}
+
+.card-news:hover .arrow__default {
+  opacity: 0;
+}
+
+.card-news:hover .arrow__hover {
+  opacity: 1;
+}
+
+.card-news:hover .arrow img {
+  transform: translateX(3px);
+}
+
+/* ---------- Card/Collection ----------
+   Hover no se pudo leer de Figma; se aplica el mismo patrón que Card/News. */
+.card-collection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-18);
+  color: var(--brand-navy);
+}
+
+.card-collection__image {
+  --mosaic-cols: 4;
+  background: var(--surface-mosaic);
+}
+
+.card-collection__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.card-collection__title {
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.card-collection__desc {
+  color: var(--neutral-text-secondary);
+}
+
+/* ---------- Menú lateral ---------- */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+
+.menu__scrim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: var(--brand-navy);
+  opacity: 0.6;
+  cursor: default;
+}
+
+.menu__panel {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  width: min(400px, 100%);
+  padding: var(--space-24) var(--space-32) var(--space-32);
+  overflow-y: auto;
+  background: var(--brand-navy);
+  color: var(--neutral-white);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .menu:not([hidden]) .menu__panel {
+    animation: menu-in var(--duration-slide) var(--ease);
+  }
+
+  .menu:not([hidden]) .menu__scrim {
+    animation: scrim-in var(--duration-slide) var(--ease);
+  }
+}
+
+@keyframes menu-in {
+  from { transform: translateX(-24px); opacity: 0; }
+}
+
+@keyframes scrim-in {
+  from { opacity: 0; }
+}
+
+.menu__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--neutral-white);
+  border-radius: var(--radius-14);
+  transition: background-color var(--duration-fast) var(--ease);
+}
+
+.menu__close:hover {
+  background: var(--neutral-white-12);
+}
+
+.menu__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.menu__link {
+  display: block;
+  padding: var(--space-14) var(--space-16);
+  border-radius: var(--radius-14);
+  transition: background-color var(--duration-fast) var(--ease);
+}
+
+.menu__link:hover {
+  background: var(--neutral-white-12);
+}
