@@ -1,0 +1,145 @@
+/* ==========================================================================
+   RUVIK · Design tokens
+   Fuente: Figma "RUVIK Home" → página Fundamentos (variables y estilos de texto).
+   Los nombres siguen las variables de Figma: brand/navy → --brand-navy.
+   ========================================================================== */
+
+:root {
+  /* ---------- Color · brand ---------- */
+  --brand-navy: #23184c;
+  --brand-violet: #8054ef;
+  --brand-yellow: #f4bb04;
+  --brand-mint: #00d2a0;
+  --brand-cyan: #08bfe1;
+  --brand-orange: #ea7f2e;
+  --brand-pink: #e44971;
+  --brand-lilac: #aa6af4;
+  --brand-red-orange: #e55d2e;
+  --brand-blue: #4a4cf4;
+
+  /* ---------- Color · neutral ---------- */
+  --neutral-white: #ffffff;
+  --neutral-white-12: rgb(255 255 255 / 0.12);
+  --neutral-divider: #dad4f0;
+  --neutral-divider-dark: #4c3f86;
+  --neutral-dot: #8c80bc;
+  --neutral-text-secondary: #5b5478;
+  --neutral-text-on-dark: #e6e0fa;
+  --neutral-tagline: #cfc8f0;
+
+  /* ---------- Color · surface ---------- */
+  --surface-lilac: #f3f0fd;
+  --surface-mosaic: #e9e4f9;
+
+  /* ---------- Color · semantic aliases ---------- */
+  --color-text: var(--brand-navy);
+  --color-bg: var(--neutral-white);
+  --color-accent: var(--brand-violet);
+  --focus-ring: var(--brand-blue);          /* sobre fondos claros */
+  --focus-ring-on-dark: var(--brand-yellow); /* sobre fondos oscuros */
+
+  /* ---------- Tipografía · familias ---------- */
+  --font-sans: "Outfit", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-tagline: "Lato", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* ---------- Tipografía · pesos ---------- */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ---------- Tipografía · estilos (tamaño / interlineado / tracking) ----------
+     Figma expresa el letter-spacing en %, aquí en em (7% → .07em).
+     Display/H1 escala de 40px (móvil) a 64px (≥1440). */
+  --fs-display-h1: clamp(2.5rem, 1.4rem + 3.4vw, 4rem);      /* 64 */
+  --lh-display-h1: 1.047;                                     /* 67/64 */
+  --ls-display-h1: -0.02em;
+
+  --fs-heading-collection: 1.3125rem;                         /* 21 */
+  --lh-heading-collection: 1.4;                               /* 29.4 */
+  --ls-heading-collection: 0.05em;
+
+  --fs-heading-section: 1.0625rem;                            /* 17 */
+  --lh-heading-section: 1.5rem;                               /* 24 */
+  --ls-heading-section: 0.07em;
+
+  --fs-heading-eyebrow: 0.875rem;                             /* 14 */
+  --lh-heading-eyebrow: 1.25rem;                              /* 20 */
+  --ls-heading-eyebrow: 0.16em;
+
+  --fs-body-lead: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem); /* 19 */
+  --lh-body-lead: 1.5;                                        /* 28.5 */
+
+  --fs-body-tile: 1.25rem;                                    /* 20 */
+  --lh-body-tile: 1.5rem;                                     /* 24 */
+
+  --fs-body-card-title: 1.1875rem;                            /* 19 */
+  --lh-body-card-title: 1.4;                                  /* 26.6 */
+
+  --fs-body-faq: 1.0625rem;                                   /* 17 */
+  --lh-body-faq: 1.4;                                         /* 23.8 */
+
+  --fs-body-default: 1rem;                                    /* 16 */
+  --lh-body-default: 1.4;                                     /* 22.4 */
+
+  --fs-body-small: 0.875rem;                                  /* 14 */
+  --lh-body-small: 1.4;                                       /* 19.6 */
+
+  --fs-body-contact: 1rem;                                    /* 16 */
+  --lh-body-contact: 1.6;                                     /* 25.6 */
+
+  --fs-body-tagline: 1.0625rem;                               /* 17 */
+  --lh-body-tagline: 1.5rem;                                  /* 24 */
+
+  --fs-label-button: 0.875rem;                                /* 14 */
+  --lh-label-button: 1.25rem;                                 /* 20 */
+  --ls-label-button: 0.08em;
+
+  --fs-label-cta: 1rem;                                       /* 16 */
+  --lh-label-cta: 1.4;                                        /* 22.4 */
+
+  /* ---------- Espaciado ---------- */
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-22: 22px;
+  --space-24: 24px;
+  --space-26: 26px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-36: 36px;
+  --space-40: 40px;
+  --space-44: 44px;
+  --space-48: 48px;
+  --space-56: 56px;
+  --space-64: 64px;
+  --space-72: 72px;
+
+  /* ---------- Radios ---------- */
+  --radius-14: 14px;
+  --radius-32: 32px;
+  --radius-150: 150px;
+  --radius-pill: 999px;
+
+  /* ---------- Layout ---------- */
+  --container-max: 1280px;                           /* 1440 - 2 × 80 */
+  --gutter: clamp(16px, 5.56vw, 80px);               /* 80px a 1440 */
+  --section-pad-y: clamp(40px, 5vw, 72px);           /* 72px a 1440 */
+  --header-control-h: 48px;
+
+  /* Breakpoints (referencia; CSS no permite var() en @media):
+     sm 640px · md 768px · lg 1024px · xl 1280px · xxl 1440px */
+
+  /* ---------- Movimiento ---------- */
+  --duration-fast: 0.2s;
+  --duration-slide: 0.3s;
+  --ease: ease;
+  --tile-lift: -3px;
+}

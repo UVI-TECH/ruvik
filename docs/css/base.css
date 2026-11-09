@@ -1,0 +1,220 @@
+/* ==========================================================================
+   RUVIK · Base: reset, tipografía y utilidades
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body-default);
+  line-height: var(--lh-body-default);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body.is-locked {
+  overflow: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-size: inherit;
+  font-weight: inherit;
+  overflow-wrap: break-word;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- Foco accesible ---------- */
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.on-dark {
+  --focus-ring: var(--focus-ring-on-dark);
+}
+
+/* ---------- Utilidades ---------- */
+.container {
+  width: 100%;
+  max-width: calc(var(--container-max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-16);
+  top: -100px;
+  z-index: 100;
+  padding: var(--space-10) var(--space-18);
+  border-radius: var(--radius-14);
+  background: var(--brand-yellow);
+  color: var(--brand-navy);
+  font-weight: var(--fw-bold);
+}
+
+.skip-link:focus {
+  top: var(--space-16);
+}
+
+/* ---------- Estilos de texto (Figma → clases) ---------- */
+.t-display-h1 {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-display-h1);
+  line-height: var(--lh-display-h1);
+  letter-spacing: var(--ls-display-h1);
+}
+
+.t-heading-collection {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-heading-collection);
+  line-height: var(--lh-heading-collection);
+  letter-spacing: var(--ls-heading-collection);
+  text-transform: uppercase;
+}
+
+.t-heading-section {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-heading-section);
+  line-height: var(--lh-heading-section);
+  letter-spacing: var(--ls-heading-section);
+  text-transform: uppercase;
+}
+
+.t-heading-eyebrow {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-heading-eyebrow);
+  line-height: var(--lh-heading-eyebrow);
+  letter-spacing: var(--ls-heading-eyebrow);
+}
+
+.t-body-lead {
+  font-weight: var(--fw-light);
+  font-size: var(--fs-body-lead);
+  line-height: var(--lh-body-lead);
+}
+
+.t-body-tile {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-body-tile);
+  line-height: var(--lh-body-tile);
+}
+
+.t-body-card-title {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-body-card-title);
+  line-height: var(--lh-body-card-title);
+}
+
+.t-body-faq {
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body-faq);
+  line-height: var(--lh-body-faq);
+}
+
+.t-body-default {
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body-default);
+  line-height: var(--lh-body-default);
+}
+
+.t-body-small {
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body-small);
+  line-height: var(--lh-body-small);
+}
+
+.t-body-contact {
+  font-weight: var(--fw-light);
+  font-size: var(--fs-body-contact);
+  line-height: var(--lh-body-contact);
+}
+
+.t-body-tagline {
+  font-family: var(--font-tagline);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body-tagline);
+  line-height: var(--lh-body-tagline);
+}
+
+.t-label-button {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-label-button);
+  line-height: var(--lh-label-button);
+  letter-spacing: var(--ls-label-button);
+  text-transform: uppercase;
+}
+
+.t-label-cta {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-label-cta);
+  line-height: var(--lh-label-cta);
+}
