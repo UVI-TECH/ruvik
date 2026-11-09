@@ -95,8 +95,7 @@
 }
 
 /* ---------- Button/CTA ----------
-   Hover y Focus: no se pudieron leer de Figma (límite de API). Propuesta:
-   hover un poco más claro con elevación; focus con anillo amarillo. */
+   Default: amarillo · Hover: blanco · Focus: anillo brand/blue. Sin desplazamiento. */
 .btn-cta {
   display: inline-flex;
   align-items: center;
@@ -106,17 +105,15 @@
   background: var(--brand-yellow);
   color: var(--brand-navy);
   white-space: nowrap;
-  transition:
-    background-color var(--duration-fast) var(--ease),
-    transform var(--duration-fast) var(--ease);
+  transition: background-color var(--duration-fast) var(--ease);
 }
 
 .btn-cta:hover {
-  background: color-mix(in srgb, var(--brand-yellow) 85%, var(--neutral-white));
-  transform: translateY(-2px);
+  background: var(--neutral-white);
 }
 
 .btn-cta:focus-visible {
+  outline-color: var(--brand-blue);
   outline-offset: 4px;
 }
 
@@ -309,7 +306,7 @@
 }
 
 /* ---------- Card/Collection ----------
-   Hover no se pudo leer de Figma; se aplica el mismo patrón que Card/News. */
+   Hover: solo el título cambia a brand/violet. */
 .card-collection {
   display: flex;
   flex-direction: column;

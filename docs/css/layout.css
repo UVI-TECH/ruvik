@@ -476,7 +476,8 @@
 }
 
 .site-footer__mosaic {
-  --mosaic-cell: 48px;
+  width: 152px;
+  height: auto;
   align-self: flex-start;
 }
 
@@ -509,13 +510,13 @@
   }
 
   .site-footer__mosaic {
-    --mosaic-cell: 60px;
+    width: 188px;
     align-self: auto;
   }
 }
 
 @media (min-width: 1024px) {
   .site-footer__mosaic {
-    --mosaic-cell: 72px;
+    width: 224px;
   }
 }
