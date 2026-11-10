@@ -64,26 +64,12 @@
     });
   }
 
-  /* ---------- Menú lateral ---------- */
-  function initMenu(menu, toggle) {
-    const panel = menu.querySelector(".menu__panel");
-    const focusableSel = 'a[href], button:not([tabindex="-1"]), [tabindex="0"]';
+  /* ---------- Diálogo modal reutilizable ----------
+     Bloquea el scroll, atrapa el foco, cierra con Esc y devuelve el foco. */
+  const FOCUSABLE = 'a[href], button:not([tabindex="-1"]), input, [tabindex="0"]';
 
-    function open() {
-      menu.hidden = false;
-      toggle.setAttribute("aria-expanded", "true");
-      document.body.classList.add("is-locked");
-      menu.querySelector(".menu__close").focus();
-      document.addEventListener("keydown", onKeydown);
-    }
-
-    function close({ restoreFocus = true } = {}) {
-      menu.hidden = true;
-      toggle.setAttribute("aria-expanded", "false");
-      document.body.classList.remove("is-locked");
-      document.removeEventListener("keydown", onKeydown);
-      if (restoreFocus) toggle.focus();
-    }
+  function createModal(root, { panel, initialFocus, onOpen, onClose } = {}) {
+    let opener = null;
 
     function onKeydown(e) {
       if (e.key === "Escape") {
@@ -92,7 +78,7 @@
         return;
       }
       if (e.key !== "Tab") return;
-      const items = [...panel.querySelectorAll(focusableSel)].filter((el) => el.offsetParent !== null);
+      const items = [...panel.querySelectorAll(FOCUSABLE)].filter((el) => el.offsetParent !== null);
       const first = items[0];
       const last = items[items.length - 1];
       if (e.shiftKey && document.activeElement === first) {
@@ -104,11 +90,42 @@
       }
     }
 
-    toggle.addEventListener("click", open);
-    menu.querySelectorAll("[data-menu-close]").forEach((el) => el.addEventListener("click", () => close()));
+    function open(trigger = document.activeElement) {
+      opener = trigger;
+      root.hidden = false;
+      document.body.classList.add("is-locked");
+      document.addEventListener("keydown", onKeydown);
+      onOpen?.(trigger);
+      initialFocus()?.focus();
+    }
+
+    function close({ restoreFocus = true } = {}) {
+      if (root.hidden) return;
+      root.hidden = true;
+      document.body.classList.remove("is-locked");
+      document.removeEventListener("keydown", onKeydown);
+      onClose?.();
+      if (restoreFocus && opener && opener.offsetParent !== null) opener.focus();
+    }
+
+    return { open, close, isOpen: () => !root.hidden };
+  }
+
+  /* ---------- Menú lateral ---------- */
+  function initMenu(menu, toggle) {
+    const modal = createModal(menu, {
+      panel: menu.querySelector(".menu__panel"),
+      initialFocus: () => menu.querySelector(".menu__close"),
+      onOpen: () => toggle.setAttribute("aria-expanded", "true"),
+      onClose: () => toggle.setAttribute("aria-expanded", "false"),
+    });
+
+    toggle.addEventListener("click", () => modal.open(toggle));
+    menu.querySelectorAll("[data-menu-close]").forEach((el) => el.addEventListener("click", () => modal.close()));
+    const close = (opts) => modal.close(opts);
 
     // Al elegir una opción: cerrar y dejar que el ancla lleve a la sección
-    menu.querySelectorAll(".menu__link").forEach((link) => {
+    menu.querySelectorAll("a.menu__link").forEach((link) => {
       link.addEventListener("click", () => {
         const hash = link.getAttribute("href");
         close({ restoreFocus: false });
@@ -119,6 +136,73 @@
         }
       });
     });
+
+    return modal;
+  }
+
+  /* ---------- Búsqueda ----------
+     Aún no hay catálogo: toda búsqueda muestra el estado "sin resultados".
+     Para conectarla, reemplazar el cuerpo de search() por la consulta real. */
+  function initSearch(root, { menuModal } = {}) {
+    const form = root.querySelector(".search-form");
+    const input = root.querySelector(".search-field__input");
+    const title = root.querySelector("#search-title");
+    const hint = root.querySelector(".search-modal__hint");
+    const result = root.querySelector(".search-result__body");
+    const query = root.querySelector(".search-result__query");
+    const HINT = hint.textContent;
+
+    const modal = createModal(root, {
+      panel: root.querySelector(".search-modal__dialog"),
+      initialFocus: () => input,
+      onOpen: (trigger) => {
+        title.textContent = trigger?.dataset?.searchOpen === "advanced" ? "Búsqueda avanzada" : "Buscar";
+        input.select();
+      },
+    });
+
+    function setHint(text, isError = false) {
+      hint.textContent = text;
+      hint.classList.toggle("is-error", isError);
+    }
+
+    function search(term) {
+      query.textContent = term;
+      result.hidden = false;
+      setHint(HINT);
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const term = input.value.trim();
+      if (!term) {
+        result.hidden = true;
+        setHint("Escribe al menos una palabra para buscar.", true);
+        input.focus();
+        return;
+      }
+      search(term);
+    });
+
+    // Al borrar el texto se limpia el resultado anterior
+    input.addEventListener("input", () => {
+      if (!input.value.trim()) result.hidden = true;
+      if (hint.classList.contains("is-error")) setHint(HINT);
+    });
+
+    document.querySelectorAll("[data-search-open]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (menuModal?.isOpen()) {
+          menuModal.close({ restoreFocus: false });
+          modal.open(document.getElementById("menu-toggle"));
+          title.textContent = "Búsqueda avanzada";
+        } else {
+          modal.open(btn);
+        }
+      });
+    });
+
+    root.querySelectorAll("[data-search-close]").forEach((el) => el.addEventListener("click", () => modal.close()));
   }
 
   /* ---------- Contenido sorpresa ----------
@@ -158,7 +242,10 @@
 
   const menu = document.getElementById("menu");
   const toggle = document.getElementById("menu-toggle");
-  if (menu && toggle) initMenu(menu, toggle);
+  const menuModal = menu && toggle ? initMenu(menu, toggle) : null;
+
+  const search = document.getElementById("search");
+  if (search) initSearch(search, { menuModal });
 
   const surprise = document.getElementById("sorpresa");
   if (surprise) initSurprise(surprise);
