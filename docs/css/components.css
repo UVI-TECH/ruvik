@@ -258,6 +258,14 @@
   background: var(--surface-mosaic);
 }
 
+img.card-news__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
 .card-news__row {
   display: flex;
   align-items: center;

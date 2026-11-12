@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Búsqueda avanzada · RUVIK</title>
+  <meta name="theme-color" content="#23184c">
+  <link rel="icon" href="assets/img/mosaic-footer.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Outfit:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/paginas.css">
+  <script src="js/recursos.js"></script>
+  <script src="js/paginas.js" defer></script>
+</head>
+<body data-page="buscar">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div id="slot-header"></div>
+
+  <main class="page" id="contenido">
+    <section class="container search-page-head" aria-labelledby="b-t">
+      <h1 class="section-title" id="b-t">
+        <span class="section-title__marker cell c-yellow cell--tr" aria-hidden="true"></span>
+        <span class="section-title__text t-heading-section">Búsqueda avanzada</span>
+      </h1>
+      <form class="search-bar" id="form-busqueda" role="search" novalidate>
+        <label class="search-field">
+          <span class="visually-hidden">Término de búsqueda</span>
+          <img src="assets/icons/search-navy.svg" width="20" height="20" alt="">
+          <input class="search-field__input t-body-faq" type="search" id="q" name="q" placeholder="Recursos, autores o colecciones" autocomplete="off" enterkeyhint="search">
+        </label>
+        <button class="btn-cta t-label-cta" type="submit">Buscar</button>
+      </form>
+    </section>
+
+    <div class="container results-layout">
+      <form class="filters panel" aria-label="Filtros" onsubmit="return false">
+        <h2 class="t-heading-section">Filtros</h2>
+        <label class="t-body-small">Tipo de recurso<select class="select t-body-default" id="f-tipo"><option value="">Todos</option></select></label>
+        <label class="t-body-small">Facultad<select class="select t-body-default" id="f-facultad"><option value="">Todas</option></select></label>
+        <label class="t-body-small">Programa<select class="select t-body-default" id="f-programa"><option value="">Todos</option></select></label>
+        <p class="t-body-small muted">Pendientes de definir: tipo de RED, colección y acceso.</p>
+        <button class="link-quiet t-label-button filters__clear" type="button" id="limpiar">Limpiar filtros</button>
+      </form>
+
+      <section aria-labelledby="r-t">
+        <div class="results-head">
+          <h2 class="t-heading-section" id="r-t">Resultados</h2>
+          <p class="t-body-default muted" id="conteo" aria-live="polite"></p>
+        </div>
+        <ul class="results-grid" id="resultados"></ul>
+        <div class="empty" id="sin-resultados" hidden>
+          <div class="mosaic empty__mosaic" aria-hidden="true"><span class="cell c-violet cell--tl"></span><span class="cell c-yellow"></span><span class="cell c-mint"></span><span class="cell c-pink cell--br"></span></div>
+          <div>
+            <p class="t-body-card-title">No encontramos resultados para “<span class="empty__q" id="sin-resultados-q"></span>”</p>
+            <p class="t-body-default muted">Revisa la ortografía, prueba con otras palabras o limpia los filtros.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="slot-footer"></div>
+</body>
+</html>

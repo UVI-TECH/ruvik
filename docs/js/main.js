@@ -129,7 +129,8 @@
       link.addEventListener("click", () => {
         const hash = link.getAttribute("href");
         close({ restoreFocus: false });
-        const target = hash.length > 1 ? document.querySelector(hash) : null;
+        // Los enlaces a otras páginas (p. ej. buscar.html) navegan solos
+        const target = hash.startsWith("#") && hash.length > 1 ? document.querySelector(hash) : null;
         if (target) {
           target.setAttribute("tabindex", "-1");
           target.focus({ preventScroll: true });
@@ -166,10 +167,9 @@
       hint.classList.toggle("is-error", isError);
     }
 
+    // Con catálogo de ejemplo (js/recursos.js) la búsqueda se resuelve en buscar.html
     function search(term) {
-      query.textContent = term;
-      result.hidden = false;
-      setHint(HINT);
+      location.href = "buscar.html?q=" + encodeURIComponent(term);
     }
 
     form.addEventListener("submit", (e) => {
@@ -209,13 +209,12 @@
      Datos de ejemplo: reemplazar por el catálogo real de recursos y autores. */
   const SURPRISE = {
     resource: [
-      { title: "Recurso de ejemplo A", href: "#" },
-      { title: "Recurso de ejemplo B", href: "#" },
-      { title: "Recurso de ejemplo C", href: "#" },
+      { title: "¡Exploremos el entorno de Adobe Illustrator!", href: "recurso.html?r=1" },
+      { title: "Narrativas que conectan", href: "recurso.html?r=2" },
+      { title: "¿Qué es el diseño editorial?", href: "recurso.html?r=3" },
     ],
     author: [
-      { title: "Autor de ejemplo A", href: "#" },
-      { title: "Autor de ejemplo B", href: "#" },
+      { title: "Hellen Zamudio", href: "autores.html?a=hellen-zamudio" },
     ],
   };
 
