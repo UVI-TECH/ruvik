@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/layout.css">
 
+  <script src="js/data.js" defer></script>
   <script src="js/main.js" defer></script>
 </head>
 <body>
@@ -45,7 +46,7 @@
           <span class="header-btn__label t-label-button" aria-hidden="true">Buscar</span>
         </button>
         <span class="search-group__divider" aria-hidden="true"></span>
-        <a class="header-btn header-btn--segment search-group__advanced" href="buscar.html">
+        <a class="header-btn header-btn--segment search-group__advanced" href="busqueda.html">
           <span class="t-label-button">Búsqueda avanzada</span>
         </a>
       </div>
@@ -280,7 +281,7 @@
         </h2>
         <ul class="collections__grid">
           <li>
-            <a class="card-collection" href="colecciones.html?c=diseno-visual">
+            <a class="card-collection" href="colecciones.html?c=coleccion-1">
               <div class="card-collection__image mosaic" aria-hidden="true">
                 <span class="cell c-yellow cell--bl"></span><span class="cell c-orange"></span><span class="cell c-red-orange cell--tr"></span><span class="cell"></span>
                 <span class="cell"></span><span class="cell c-yellow"></span><span class="cell c-pink cell--br"></span><span class="cell c-orange cell--tr"></span>
@@ -292,7 +293,7 @@
             </a>
           </li>
           <li>
-            <a class="card-collection" href="colecciones.html?c=imagenes-interactivas">
+            <a class="card-collection" href="colecciones.html?c=coleccion-2">
               <div class="card-collection__image mosaic" aria-hidden="true">
                 <span class="cell"></span><span class="cell c-mint cell--bl"></span><span class="cell c-cyan"></span><span class="cell c-violet cell--tr"></span>
                 <span class="cell c-lilac cell--tl"></span><span class="cell c-violet"></span><span class="cell c-mint cell--br"></span><span class="cell"></span>
@@ -355,7 +356,7 @@
           <li><a class="menu__link t-body-faq" href="#colecciones">Colecciones</a></li>
           <li><a class="menu__link t-body-faq" href="autores.html">Autores</a></li>
           <li><a class="menu__link t-body-faq" href="#contacto">Contacto</a></li>
-          <li class="menu__item--mobile"><a class="menu__link t-body-faq" href="buscar.html">Búsqueda avanzada</a></li>
+          <li class="menu__item--mobile"><a class="menu__link t-body-faq" href="busqueda.html">Búsqueda avanzada</a></li>
         </ul>
       </nav>
     </div>
@@ -386,19 +387,6 @@
       </form>
 
       <p class="search-modal__hint t-body-small" id="search-hint">Escribe una palabra y presiona Enter.</p>
-
-      <div class="search-result" aria-live="polite">
-        <div class="search-result__body" hidden>
-          <span class="search-result__mosaic mosaic" aria-hidden="true">
-            <span class="cell c-violet cell--tl"></span><span class="cell c-yellow"></span>
-            <span class="cell c-mint"></span><span class="cell c-pink cell--br"></span>
-          </span>
-          <div class="search-result__text">
-            <p class="search-result__title t-body-card-title">No encontramos resultados para “<span class="search-result__query"></span>”</p>
-            <p class="search-result__desc t-body-default">Revisa la ortografía o prueba con otras palabras.</p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </body>

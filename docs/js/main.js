@@ -1,9 +1,9 @@
 /* ==========================================================================
-   RUVIK · Interacciones de la Home
-   - Carrusel del hero (puntos, flechas de teclado, sin autoplay)
-   - Acordeón de preguntas frecuentes
-   - Menú lateral (X, Esc, clic fuera, foco atrapado)
-   - Contenido sorpresa al azar
+   RUVIK · Interacciones compartidas
+   - Carrusel del hero y acordeón FAQ (Home)
+   - Menú lateral (X, Esc, clic fuera, foco atrapado) · todas las páginas
+   - Modal de búsqueda rápida → busqueda.html?q= · todas las páginas
+   - Contenido sorpresa al azar (Home)
    ========================================================================== */
 
 (() => {
@@ -127,10 +127,10 @@
     // Al elegir una opción: cerrar y dejar que el ancla lleve a la sección
     menu.querySelectorAll("a.menu__link").forEach((link) => {
       link.addEventListener("click", () => {
-        const hash = link.getAttribute("href");
         close({ restoreFocus: false });
-        // Los enlaces a otras páginas (p. ej. buscar.html) navegan solos
-        const target = hash.startsWith("#") && hash.length > 1 ? document.querySelector(hash) : null;
+        // Solo anclas de esta misma página; las demás navegan normalmente
+        const samePage = link.pathname === location.pathname;
+        const target = samePage && link.hash.length > 1 ? document.getElementById(link.hash.slice(1)) : null;
         if (target) {
           target.setAttribute("tabindex", "-1");
           target.focus({ preventScroll: true });
@@ -141,25 +141,18 @@
     return modal;
   }
 
-  /* ---------- Búsqueda ----------
-     Aún no hay catálogo: toda búsqueda muestra el estado "sin resultados".
-     Para conectarla, reemplazar el cuerpo de search() por la consulta real. */
+  /* ---------- Búsqueda rápida ----------
+     El modal lleva a la búsqueda avanzada con el término escrito. */
   function initSearch(root, { menuModal } = {}) {
     const form = root.querySelector(".search-form");
     const input = root.querySelector(".search-field__input");
-    const title = root.querySelector("#search-title");
     const hint = root.querySelector(".search-modal__hint");
-    const result = root.querySelector(".search-result__body");
-    const query = root.querySelector(".search-result__query");
     const HINT = hint.textContent;
 
     const modal = createModal(root, {
       panel: root.querySelector(".search-modal__dialog"),
       initialFocus: () => input,
-      onOpen: (trigger) => {
-        title.textContent = trigger?.dataset?.searchOpen === "advanced" ? "Búsqueda avanzada" : "Buscar";
-        input.select();
-      },
+      onOpen: () => input.select(),
     });
 
     function setHint(text, isError = false) {
@@ -167,26 +160,18 @@
       hint.classList.toggle("is-error", isError);
     }
 
-    // Con catálogo de ejemplo (js/recursos.js) la búsqueda se resuelve en buscar.html
-    function search(term) {
-      location.href = "buscar.html?q=" + encodeURIComponent(term);
-    }
-
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const term = input.value.trim();
       if (!term) {
-        result.hidden = true;
         setHint("Escribe al menos una palabra para buscar.", true);
         input.focus();
         return;
       }
-      search(term);
+      location.href = `busqueda.html?q=${encodeURIComponent(term)}`;
     });
 
-    // Al borrar el texto se limpia el resultado anterior
     input.addEventListener("input", () => {
-      if (!input.value.trim()) result.hidden = true;
       if (hint.classList.contains("is-error")) setHint(HINT);
     });
 
@@ -195,7 +180,6 @@
         if (menuModal?.isOpen()) {
           menuModal.close({ restoreFocus: false });
           modal.open(document.getElementById("menu-toggle"));
-          title.textContent = "Búsqueda avanzada";
         } else {
           modal.open(btn);
         }
@@ -206,15 +190,18 @@
   }
 
   /* ---------- Contenido sorpresa ----------
-     Datos de ejemplo: reemplazar por el catálogo real de recursos y autores. */
+     Recursos desde js/data.js (si la página lo carga); autores aún de ejemplo. */
   const SURPRISE = {
-    resource: [
-      { title: "¡Exploremos el entorno de Adobe Illustrator!", href: "recurso.html?r=1" },
-      { title: "Narrativas que conectan", href: "recurso.html?r=2" },
-      { title: "¿Qué es el diseño editorial?", href: "recurso.html?r=3" },
-    ],
+    resource: (window.RUVIK?.resources || []).map((r) => ({
+      title: r.title,
+      href: `recurso.html?id=${encodeURIComponent(r.id)}`,
+    })),
     author: [
-      { title: "Hellen Zamudio", href: "autores.html?a=hellen-zamudio" },
+      ...new Map(
+        (window.RUVIK?.resources || [])
+          .filter((r) => r.author)
+          .map((r) => [r.author.name, { title: r.author.name, href: `autores.html?a=${encodeURIComponent(r.author.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""))}` }])
+      ).values(),
     ],
   };
 

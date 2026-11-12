@@ -56,6 +56,11 @@
   --lh-display-h1: 1.047;                                     /* 67/64 */
   --ls-display-h1: -0.02em;
 
+  /* Título de recurso: 32px (móvil) a 48px (≥1440). Medido sobre capturas de Figma. */
+  --fs-display-h2: clamp(2rem, 1.55rem + 1.4vw, 3rem);        /* 48 */
+  --lh-display-h2: 1.15;
+  --ls-display-h2: -0.02em;
+
   --fs-heading-collection: 1.3125rem;                         /* 21 */
   --lh-heading-collection: 1.4;                               /* 29.4 */
   --ls-heading-collection: 0.05em;
@@ -85,6 +90,9 @@
 
   --fs-body-small: 0.875rem;                                  /* 14 */
   --lh-body-small: 1.4;                                       /* 19.6 */
+
+  --fs-body-caption: 0.8125rem;                               /* 13 */
+  --lh-body-caption: 1.45;
 
   --fs-body-contact: 1rem;                                    /* 16 */
   --lh-body-contact: 1.6;                                     /* 25.6 */

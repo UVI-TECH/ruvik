@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Búsqueda avanzada · RUVIK</title>
+  <meta name="description" content="Busca recursos educativos de RUVIK por tema, autor o palabra clave y filtra por tipo, facultad, formato, colección y acceso.">
+  <meta name="theme-color" content="#23184c">
+  <link rel="icon" href="assets/img/mosaic-footer.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400&family=Outfit:wght@300;400;500;600;700&display=swap">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <script src="js/data.js" defer></script>
+  <script src="js/render.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/busqueda.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ===================== Header ===================== -->
+  <header class="site-header on-dark" id="inicio">
+    <div class="container site-header__inner">
+      <div class="site-header__left">
+        <button class="header-btn header-btn--outlined" type="button" id="menu-toggle" aria-expanded="false" aria-controls="menu">
+          <img class="header-btn__icon" src="assets/icons/menu.svg" width="22" height="22" alt="">
+          <span class="header-btn__label t-label-button">Menú</span>
+        </button>
+        <div class="site-header__logos">
+          <img class="site-header__logo-uniajc" src="assets/logos/uniajc-virtual.svg" width="158" height="44" alt="UNIAJC Virtual">
+          <span class="site-header__divider" aria-hidden="true"></span>
+          <a href="index.html" aria-label="RUVIK, ir al inicio">
+            <img src="assets/logos/ruvik.svg" width="130" height="44" alt="">
+          </a>
+        </div>
+      </div>
+
+      <div class="search-group">
+        <button class="header-btn header-btn--segment" type="button" aria-label="Buscar" aria-haspopup="dialog" aria-controls="search" data-search-open>
+          <img class="header-btn__icon" src="assets/icons/search.svg" width="20" height="20" alt="">
+          <span class="header-btn__label t-label-button" aria-hidden="true">Buscar</span>
+        </button>
+        <span class="search-group__divider" aria-hidden="true"></span>
+        <a class="header-btn header-btn--segment search-group__advanced" href="busqueda.html" aria-current="page">
+          <span class="t-label-button">Búsqueda avanzada</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido" data-page="busqueda">
+    <!-- Filtros y resultados se completan con js/busqueda.js -->
+    <div class="container page">
+      <section class="page__section" aria-labelledby="busqueda-title">
+        <h1 class="section-title" id="busqueda-title">
+          <span class="section-title__marker cell c-violet cell--tr" aria-hidden="true"></span>
+          <span class="section-title__text t-heading-section">Búsqueda avanzada</span>
+        </h1>
+
+        <form class="search-bar" role="search" id="advanced-search" novalidate>
+          <label class="visually-hidden" for="q">Buscar recursos</label>
+          <img src="assets/icons/search-navy.svg" width="20" height="20" alt="">
+          <input class="search-bar__input t-body-default" type="search" name="q" id="q"
+                 placeholder="Busca por tema, autor o palabra clave" autocomplete="off" enterkeyhint="search">
+          <button class="btn-cta btn-cta--on-light t-label-cta" type="submit">Buscar</button>
+        </form>
+      </section>
+
+      <div class="search-layout">
+        <aside class="filters" aria-label="Filtros">
+          <button class="filters__toggle" type="button" aria-expanded="false" aria-controls="filters-body">
+            <span class="t-heading-section">Filtros <span class="filters__count"></span></span>
+            <img class="filters__toggle-icon" src="assets/icons/plus.svg" width="22" height="22" alt="">
+          </button>
+          <form class="filters__body" id="filters-body" novalidate>
+            <h2 class="filters__heading t-heading-section">Filtros</h2>
+            <!-- Los grupos de filtros se generan desde RUVIK.filters (js/data.js) -->
+            <button class="btn-outline btn-outline--block t-label-button" type="reset">Limpiar filtros</button>
+          </form>
+        </aside>
+
+        <section class="results" aria-labelledby="results-count">
+          <div class="results__top">
+            <h2 class="t-heading-section" id="results-count" aria-live="polite"></h2>
+            <label class="sort">
+              <span class="visually-hidden">Ordenar por</span>
+              <select class="sort__select" id="sort">
+                <option value="recent">Ordenar por: más recientes</option>
+                <option value="az">Ordenar por: título A–Z</option>
+                <option value="za">Ordenar por: título Z–A</option>
+              </select>
+            </label>
+          </div>
+          <ul class="resource-grid" id="results-list"></ul>
+          <div class="search-result__body" id="results-empty" hidden>
+            <span class="search-result__mosaic mosaic" aria-hidden="true">
+              <span class="cell c-violet cell--tl"></span><span class="cell c-yellow"></span>
+              <span class="cell c-mint"></span><span class="cell c-pink cell--br"></span>
+            </span>
+            <div class="search-result__text">
+              <p class="search-result__title t-body-card-title">No encontramos recursos con esa búsqueda</p>
+              <p class="search-result__desc t-body-default">Prueba con otras palabras o <button class="link" type="button" data-clear-all>limpia la búsqueda y los filtros</button>.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===================== Footer ===================== -->
+  <footer class="site-footer on-dark" id="contacto">
+    <div class="container site-footer__main">
+      <div class="site-footer__info">
+        <div class="site-footer__brand">
+          <img src="assets/logos/ruvik.svg" width="154" height="52" alt="RUVIK">
+          <p class="site-footer__tagline t-body-tagline">Conocimiento que conecta</p>
+        </div>
+        <div class="site-footer__contact">
+          <h2 class="t-heading-section">Info de contacto</h2>
+          <address class="site-footer__lines t-body-contact">
+            <a class="site-footer__mail" href="mailto:recursosruvik@uniajc.edu.co">recursosruvik@uniajc.edu.co</a>
+            <span>Santiago de Cali, Colombia</span>
+          </address>
+        </div>
+      </div>
+      <img class="site-footer__mosaic" src="assets/img/mosaic-footer.svg" width="224" height="224" alt="">
+    </div>
+    <div class="container site-footer__bottom">
+      <div class="site-footer__logos">
+        <img src="assets/logos/institucional.png" width="74" height="32" alt="Institución Universitaria Antonio José Camacho">
+        <img src="assets/logos/uniajc-virtual.svg" width="115" height="32" alt="UNIAJC Virtual">
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== Menú lateral ===================== -->
+  <div class="menu on-dark" id="menu" hidden>
+    <button class="menu__scrim" type="button" tabindex="-1" aria-label="Cerrar menú" data-menu-close></button>
+    <div class="menu__panel" role="dialog" aria-modal="true" aria-labelledby="menu-title">
+      <div class="menu__top">
+        <h2 class="t-heading-section" id="menu-title">Menú</h2>
+        <button class="menu__close" type="button" aria-label="Cerrar menú" data-menu-close>
+          <img src="assets/icons/close.svg" width="22" height="22" alt="">
+        </button>
+      </div>
+      <nav aria-label="Principal">
+        <ul class="menu__items">
+          <li><a class="menu__link t-body-faq" href="index.html">Inicio</a></li>
+          <li><a class="menu__link t-body-faq" href="que-es.html">¿Qué es RUVIK?</a></li>
+          <li><a class="menu__link t-body-faq" href="index.html#sorpresa">Contenido sorpresa</a></li>
+          <li><a class="menu__link t-body-faq" href="index.html#faq">Preguntas frecuentes</a></li>
+          <li><a class="menu__link t-body-faq" href="index.html#noticias">Noticias</a></li>
+          <li><a class="menu__link t-body-faq" href="index.html#experiencias">Experiencias</a></li>
+          <li><a class="menu__link t-body-faq" href="index.html#colecciones">Colecciones</a></li>
+          <li><a class="menu__link t-body-faq" href="autores.html">Autores</a></li>
+          <li><a class="menu__link t-body-faq" href="#contacto">Contacto</a></li>
+          <li class="menu__item--mobile"><a class="menu__link t-body-faq" href="busqueda.html">Búsqueda avanzada</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ===================== Modal de búsqueda ===================== -->
+  <div class="search-modal" id="search" hidden>
+    <div class="search-modal__scrim" data-search-close></div>
+    <div class="search-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <div class="search-modal__top">
+        <h2 class="section-title">
+          <span class="section-title__marker cell c-yellow cell--tr" aria-hidden="true"></span>
+          <span class="section-title__text t-heading-section" id="search-title">Buscar</span>
+        </h2>
+        <button class="search-modal__close" type="button" aria-label="Cerrar búsqueda" data-search-close>
+          <img src="assets/icons/close-navy.svg" width="22" height="22" alt="">
+        </button>
+      </div>
+
+      <form class="search-form" role="search" novalidate>
+        <label class="search-field">
+          <span class="visually-hidden">Término de búsqueda</span>
+          <img src="assets/icons/search-navy.svg" width="20" height="20" alt="">
+          <input class="search-field__input t-body-faq" type="search" name="q" id="search-input"
+                 placeholder="Recursos, autores o colecciones" autocomplete="off" enterkeyhint="search">
+        </label>
+        <button class="btn-cta t-label-cta" type="submit">Buscar</button>
+      </form>
+
+      <p class="search-modal__hint t-body-small" id="search-hint">Escribe una palabra y presiona Enter.</p>
+    </div>
+  </div>
+</body>
+</html>
