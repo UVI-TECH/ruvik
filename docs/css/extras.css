@@ -1,33 +1,158 @@
 /* ==========================================================================
-   RUVIK · Estilos de las páginas extra (colecciones, autores, que-es, articulo)
+   RUVIK · Páginas extra: colecciones, autores, qué es y artículo
    Prefijo x-: se apoya en tokens.css, components.css y pages.css.
    ========================================================================== */
 
-.x-page { display: flex; flex-direction: column; gap: var(--space-48); }
-.x-muted { color: var(--neutral-text-secondary); }
-.x-back { align-self: flex-start; }
-.x-eyebrow { color: var(--neutral-text-secondary); text-transform: uppercase; }
-.x-title { font-size: clamp(2rem, 1.2rem + 2.4vw, 3rem); }
-.x-prose { display: flex; flex-direction: column; gap: var(--space-12); max-width: 70ch; }
-.x-page .page__section { display: flex; flex-direction: column; gap: var(--space-20); }
+/* ==================== Compartido ==================== */
 
-.x-grid { display: grid; gap: var(--space-32) var(--space-24); grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.x-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+}
 
-.x-authors { display: grid; gap: var(--space-16); grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-.x-author-card { display: flex; align-items: center; gap: var(--space-16); padding: var(--space-16); border-radius: var(--radius-14); background: var(--surface-lilac); color: var(--brand-navy); }
-.x-author-card > div { flex: 1; min-width: 0; }
-.x-author-card:hover h3 { color: var(--brand-violet); }
-.x-author-card:hover .arrow__default { opacity: 0; }
-.x-author-card:hover .arrow__hover { opacity: 1; }
-.x-avatar { --mosaic-cols: 2; --mosaic-cell: 36px; --mosaic-gap: 3px; flex-shrink: 0; }
-.x-author-head { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--space-32); }
-.x-author-head .x-avatar { --mosaic-cell: 64px; }
-.x-author-head .x-prose { flex: 1 1 320px; }
+.x-page .page__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+}
 
-.x-about { display: flex; flex-direction: column; gap: var(--space-20); align-items: flex-start; }
-.x-steps { display: grid; gap: var(--space-16); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-.x-step { color: var(--brand-violet); }
+.x-muted {
+  color: var(--neutral-text-secondary);
+}
 
-.x-article { display: flex; flex-direction: column; gap: var(--space-24); max-width: 880px; }
-.x-article__image { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-14); }
-.x-related { display: grid; gap: var(--space-24); grid-template-columns: repeat(auto-fill, minmax(240px, 320px)); }
+.x-back {
+  align-self: flex-start;
+}
+
+.x-eyebrow {
+  color: var(--neutral-text-secondary);
+  text-transform: uppercase;
+}
+
+.x-title {
+  font-size: clamp(2rem, 1.2rem + 2.4vw, 3rem);
+}
+
+.x-prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  max-width: 70ch;
+}
+
+/* ==================== Colecciones ==================== */
+
+.x-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-32) var(--space-24);
+}
+
+/* ==================== Autores ==================== */
+
+.x-authors {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: var(--space-16);
+}
+
+.x-author-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  padding: var(--space-16);
+  border-radius: var(--radius-14);
+  background: var(--surface-lilac);
+  color: var(--brand-navy);
+}
+
+.x-author-card > div {
+  flex: 1;
+  min-width: 0;
+}
+
+/* El avatar también es un div: no debe repartirse el ancho con el texto */
+.x-author-card > .x-avatar {
+  flex: 0 0 auto;
+}
+
+.x-author-card h3 {
+  transition: color var(--duration-fast) var(--ease);
+}
+
+.x-author-card:hover h3 {
+  color: var(--brand-violet);
+}
+
+.x-author-card:hover .arrow__default {
+  opacity: 0;
+}
+
+.x-author-card:hover .arrow__hover {
+  opacity: 1;
+}
+
+.x-avatar {
+  --mosaic-cols: 2;
+  --mosaic-cell: 36px;
+  --mosaic-gap: 3px;
+  flex-shrink: 0;
+}
+
+.x-author-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-32);
+}
+
+.x-author-head .x-avatar {
+  --mosaic-cell: 64px;
+}
+
+.x-author-head .x-prose {
+  flex: 1 1 320px;
+}
+
+/* ==================== ¿Qué es RUVIK? ==================== */
+
+.x-about {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-20);
+}
+
+.x-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-16);
+}
+
+.x-step {
+  color: var(--brand-violet);
+}
+
+/* ==================== Artículo (noticia o experiencia) ==================== */
+
+.x-article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  max-width: 880px;
+}
+
+.x-article__image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: var(--radius-14);
+}
+
+.x-related {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 320px));
+  gap: var(--space-24);
+}
