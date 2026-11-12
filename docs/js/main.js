@@ -197,8 +197,11 @@
       href: `recurso.html?id=${encodeURIComponent(r.id)}`,
     })),
     author: [
-      { title: "Autor de ejemplo A", href: "#" },
-      { title: "Autor de ejemplo B", href: "#" },
+      ...new Map(
+        (window.RUVIK?.resources || [])
+          .filter((r) => r.author)
+          .map((r) => [r.author.name, { title: r.author.name, href: `autores.html?a=${encodeURIComponent(r.author.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""))}` }])
+      ).values(),
     ],
   };
 
