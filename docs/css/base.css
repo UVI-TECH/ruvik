@@ -133,6 +133,13 @@ h4 {
   letter-spacing: var(--ls-display-h1);
 }
 
+.t-display-h2 {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-display-h2);
+  line-height: var(--lh-display-h2);
+  letter-spacing: var(--ls-display-h2);
+}
+
 .t-heading-collection {
   font-weight: var(--fw-bold);
   font-size: var(--fs-heading-collection);
@@ -190,6 +197,12 @@ h4 {
   font-weight: var(--fw-regular);
   font-size: var(--fs-body-small);
   line-height: var(--lh-body-small);
+}
+
+.t-body-caption {
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body-caption);
+  line-height: var(--lh-body-caption);
 }
 
 .t-body-contact {
