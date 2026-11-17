@@ -105,7 +105,7 @@ window.RUVIK.resources = [
     mosaic: ["violet", "yellow", "cyan", "mint", "violet", "orange", "pink", "yellow", "blue"],
     synopsis:
       "Si es tu primera vez con Adobe Illustrator, este recurso te ayudará a reconocer su entorno de trabajo y a familiarizarte con sus principales herramientas y áreas, sin perderte. Está dirigido a estudiantes, profesores, profesoras y personas interesadas en el diseño que se acercan por primera vez a Adobe Illustrator.",
-    tags: ["illustrator", "Medios II", "Diseño Visual", "Adobe"],
+    tags: ["Illustrator", "Medios II", "Diseño Visual", "Adobe"],
     objective:
       "Conocer e identificar los elementos que componen el entorno de trabajo y las herramientas básicas del software Adobe Illustrator, comprendiendo su función dentro del proceso de edición de gráficos vectoriales.",
     usage:
@@ -213,7 +213,7 @@ window.RUVIK.resources = [
     },
     mosaic: ["yellow", "blue", "orange", "cyan", "yellow", "pink", "orange", "blue", "yellow"],
     synopsis:
-      "En este video podrás conocer de una manera breve y sencilla, qué es el diseño editorial, y por qué constituye una rama fundamental del diseño visual. También descubrirás cómo cumple un papel crucial a nivel social y cultural, mediando la relación entre los contenidos y los lectores.",
+      "En este video podrás conocer de una manera breve y sencilla qué es el diseño editorial, y por qué constituye una rama fundamental del diseño visual. También descubrirás cómo cumple un papel crucial a nivel social y cultural, mediando la relación entre los contenidos y los lectores.",
     tags: [],
     objective:
       "Reconocer los fundamentos del diseño editorial mediante la comprensión de sus elementos visuales, estructurales y comunicativos, para interpretar cómo la organización del contenido influye en la experiencia del usuario y en la comunicación efectiva de mensajes en publicaciones impresas y digitales.",
@@ -239,7 +239,7 @@ window.RUVIK.resources = [
     year: 2026,
     published: "2026-10-29",
     faculty: "Facultad de Educación Virtual y a Distancia",
-    program: "Licenciatura en Lenguas Extranjeras con Énfasis en inglés",
+    program: "Licenciatura en Lenguas Extranjeras con Énfasis en Inglés",
     subject: "Lengua y Cultura",
     project: "Proceso DEDA",
     advisor: { role: "Asesora", name: "Laura Hurtado" },
@@ -364,7 +364,7 @@ window.RUVIK.resources = [
     },
     mosaic: ["cyan", "orange", "violet", "pink", "mint", "yellow", "lilac", "blue", "red-orange"],
     synopsis: "Los mercados cambian, los consumidores evolucionan y las oportunidades de negocio se transforman constantemente. ¿Cómo pueden las organizaciones reconocer nuevas oportunidades y responder a los desafíos de un entorno cada vez más digital y globalizado? En este recorrido explorarás las características de los mercados emergentes y digitales, sus principales oportunidades, desafíos y tendencias, así como el papel de tecnologías como la inteligencia artificial en la transformación de los modelos de negocio.",
-    tags: ["Mercados Emergentes", "Mercados Digitales", "Transformación Digital", "Tendencias De Mercado", "Comportamiento Del Consumidor", "Inteligencia Artificial", "Estrategia Empresarial"],
+    tags: ["Mercados Emergentes", "Mercados Digitales", "Transformación Digital", "Tendencias de Mercado", "Comportamiento del Consumidor", "Inteligencia Artificial", "Estrategia Empresarial"],
     objective: "Comprender las características de los mercados emergentes y digitales, identificando las oportunidades, desafíos y tecnologías que transforman los modelos de negocio, para analizar tendencias del entorno y fundamentar decisiones estratégicas acordes con el comportamiento del mercado y los principios éticos, financieros y sociales.",
     usage: "Este recurso educativo digital se utilizará como apoyo al aprendizaje para facilitar la comprensión de las principales características de los mercados emergentes y digitales y de los factores que están transformando las dinámicas empresariales. A través de la infografía, el estudiante podrá reconocer de manera visual y sintetizada las oportunidades, desafíos, tendencias y tecnologías asociadas a estos mercados, estableciendo relaciones entre los cambios del entorno y su incidencia en los modelos de negocio. Su consulta servirá como punto de referencia para el análisis de situaciones empresariales y tendencias de mercado, permitiendo que el estudiante contraste la información presentada con escenarios actuales y valore sus posibles implicaciones para las organizaciones.",
     author: null,
@@ -398,8 +398,8 @@ window.RUVIK.resources = [
       acceso: "abierto",
     },
     mosaic: ["pink", "mint", "yellow", "blue", "orange", "cyan", "violet", "red-orange", "lilac"],
-    synopsis: "¿Qué sucede con una función cuando nos acercamos cada vez más a un punto? Aunque no siempre podamos conocer su valor exacto allí, sí podemos estudiar hacia dónde se aproxima. En este recorrido descubrirás el concepto de límite a través de representaciones gráficas, numéricas y algebraicas que te ayudarán a comprender su comportamiento y sus condiciones de existencia. Explorarás la aproximación desde ambos lados de un punto y conocerás el papel de la definición formal mediante epsilon (ε) y delta (δ), reconociendo por qué los límites son fundamentales para comprender conceptos como la continuidad y la derivada.",
-    tags: ["Cálculo", "Límites De Funciones", "Cálculo Diferencial", "Epsilon y Delta", "Funciones", "Representación Gráfica", "Razonamiento Matemático"],
+    synopsis: "¿Qué sucede con una función cuando nos acercamos cada vez más a un punto? Aunque no siempre podamos conocer su valor exacto allí, sí podemos estudiar hacia dónde se aproxima. En este recorrido descubrirás el concepto de límite a través de representaciones gráficas, numéricas y algebraicas que te ayudarán a comprender su comportamiento y sus condiciones de existencia. Explorarás la aproximación desde ambos lados de un punto y conocerás el papel de la definición formal mediante épsilon (ε) y delta (δ), reconociendo por qué los límites son fundamentales para comprender conceptos como la continuidad y la derivada.",
+    tags: ["Cálculo", "Límites de Funciones", "Cálculo Diferencial", "Épsilon y Delta", "Funciones", "Representación Gráfica", "Razonamiento Matemático"],
     objective: "Comprender la definición formal de límite de una función mediante representaciones gráficas, numéricas y algebraicas para interpretar el comportamiento de aproximación de una función en un punto.",
     usage: "El RED se utiliza como recurso de apoyo al aprendizaje durante el desarrollo del saber, con el propósito de acompañar al estudiante en la comprensión y apropiación de los conceptos abordados. El profesor comparte el enlace del recurso en el momento de la experiencia de aprendizaje en el que se trabajan estos contenidos y orienta a los estudiantes para que realicen un recorrido por la información presentada, identificando los conceptos, elementos y relaciones más relevantes. Durante su exploración, los estudiantes consultan el recurso de manera guiada o autónoma y lo utilizan como referente para aclarar, reforzar y recuperar los conceptos necesarios para el desarrollo de las actividades de aprendizaje asociadas al saber.",
     author: null,
@@ -434,7 +434,7 @@ window.RUVIK.resources = [
     },
     mosaic: ["lilac", "yellow", "red-orange", "cyan", "pink", "mint", "blue", "violet", "orange"],
     synopsis: "Lo que sucede en la naturaleza también tiene relación con nuestras decisiones, formas de vida y maneras de habitar el territorio. ¿Por qué problemáticas como el cambio climático, la pérdida de biodiversidad y la crisis del agua no pueden comprenderse únicamente desde una perspectiva ambiental? En este recorrido identificarás las principales problemáticas socioambientales contemporáneas y explorarás su relación con las transformaciones históricas entre sociedad y naturaleza.",
-    tags: ["Problemáticas Socioambientales", "Sociología Ambiental", "Cambio Climático", "Biodiversidad", "Crisis Del Agua", "Conflictos Territoriales", "Sostenibilidad"],
+    tags: ["Problemáticas Socioambientales", "Sociología Ambiental", "Cambio Climático", "Biodiversidad", "Crisis del Agua", "Conflictos Territoriales", "Sostenibilidad"],
     objective: "Identificar las principales problemáticas socioambientales contemporáneas, reconociendo las transformaciones históricas en la relación sociedad–naturaleza y sus implicaciones en los conflictos y dinámicas territoriales, para fortalecer una comprensión crítica y reflexiva frente a los desafíos socioecológicos actuales.",
     usage: "Este recurso educativo digital se utilizará como apoyo al aprendizaje para favorecer la comprensión de las principales problemáticas socioambientales contemporáneas y su relación con las transformaciones históricas en la interacción entre sociedad y naturaleza. A través de la infografía, el estudiante podrá identificar de manera visual y organizada diferentes problemáticas, reconociendo que estas se configuran a partir de factores sociales, ambientales, económicos y territoriales que se relacionan entre sí. Su consulta permitirá establecer conexiones entre las transformaciones de los territorios, las formas de aprovechamiento de los recursos naturales y los conflictos que pueden surgir entre distintos actores sociales.",
     author: null,
