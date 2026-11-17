@@ -64,7 +64,7 @@ window.RUVIK.filters = [
     label: "Acceso",
     options: [
       ["abierto", "Abierto"],
-      ["solo-uniajc", "Solo UNIAJC"],
+      ["solo-uniajc", "Solo UNICAMACHO"],
     ],
   },
 ];
