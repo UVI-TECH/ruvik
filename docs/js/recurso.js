@@ -66,7 +66,7 @@
   /* Cita APA 7: Autor. (Año). Título [Tipo]. Sitio. URL */
   const citeAuthor = r.author ? r.author.name : "Unidad Virtual de Innovación (UVI), UNICAMACHO";
   const citeUrl = new URL(R.resourceUrl(r), location.href).href;
-  const citation = `${esc(citeAuthor)}. (${esc(r.year)}). <em>${esc(r.title)}</em> [${esc(r.type)}]. RUVIK, Banco de Recursos Educativos Digitales, Institución Universitaria Antonio José Camacho (UNICAMACHO). <a class="link" href="${esc(citeUrl)}">${esc(citeUrl)}</a>`;
+  const citation = `${esc(citeAuthor)}. (${esc(r.year)}). <em>${esc(r.title)}</em> [${esc(r.type)}]. RUVIK, Banco de Recursos Educativos Digitales, Institución Universitaria Antonio José Camacho. <a class="link" href="${esc(citeUrl)}">${esc(citeUrl)}</a>`;
 
   const related = R.resources.filter((x) => x.id !== r.id);
   const shareMail = `mailto:recursosruvik@uniajc.edu.co?subject=${encodeURIComponent(`Experiencia de uso: ${r.title}`)}`;

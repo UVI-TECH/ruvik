@@ -160,7 +160,7 @@
     shell(`<section class="x-about">
         <p class="t-heading-eyebrow x-eyebrow">RUVIK</p>
         <h1 class="t-display-h1 x-title">¿Qué es RUVIK?</h1>
-        <p class="t-body-lead x-prose">Ruvik es el Banco de Recursos Educativos Digitales de la Institución Universitaria Antonio José Camacho (UNICAMACHO).</p>
+        <p class="t-body-lead x-prose">Ruvik es el Banco de Recursos Educativos Digitales de la Institución Universitaria Antonio José Camacho.</p>
         <p class="t-body-default x-prose x-muted">Su objetivo es reunir, clasificar, curar y poner a disposición de la comunidad educativa institucional y externa un conjunto amplio de recursos educativos, tanto abiertos como cerrados, que fortalezcan los procesos de enseñanza, aprendizaje, investigación e innovación pedagógica.</p>
         <a class="btn-cta btn-cta--on-light t-label-cta" href="busqueda.html">Explorar recursos</a>
       </section>
