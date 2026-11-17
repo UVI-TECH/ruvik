@@ -194,29 +194,77 @@
   const SURPRISE = {
     resource: (window.RUVIK?.resources || []).map((r) => ({
       title: r.title,
+      img: r.cover,
       href: `recurso.html?id=${encodeURIComponent(r.id)}`,
     })),
     author: [
       ...new Map(
         (window.RUVIK?.resources || [])
           .filter((r) => r.author)
-          .map((r) => [r.author.name, { title: r.author.name, href: `autores.html?a=${encodeURIComponent(r.author.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""))}` }])
+          .map((r) => [r.author.name, { title: r.author.name, img: r.cover, href: `autores.html?a=${encodeURIComponent(r.author.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""))}` }])
       ).values(),
     ],
   };
 
-  const pick = (list) => list[Math.floor(Math.random() * list.length)];
+  const pick = (list, not) => {
+    const rest = list.length > 1 ? list.filter((x) => x.href !== not) : list;
+    return rest[Math.floor(Math.random() * rest.length)];
+  };
+
+  /* Cada tarjeta muestra la portada del recurso (o del recurso del autor) y
+     cambia sola cada 45 s; el enlace y la etiqueta accesible acompañan a la imagen. */
+  const SURPRISE_MS = 45000;
 
   function initSurprise(root) {
-    root.querySelectorAll("[data-random]").forEach((tile) => {
+    const tiles = [...root.querySelectorAll("[data-random]")].filter((tile) => {
       const kind = tile.dataset.random;
-      const pool = kind === "any" ? [...SURPRISE.resource, ...SURPRISE.author] : SURPRISE[kind];
-      if (!pool || !pool.length) return;
-      const item = pick(pool);
-      const label = tile.querySelector(".tile__label").textContent.trim();
-      tile.href = item.href;
-      tile.setAttribute("aria-label", `${label}: ${item.title}`);
+      return (kind === "any" ? SURPRISE.resource.length + SURPRISE.author.length : SURPRISE[kind]?.length) > 0;
     });
+
+    tiles.forEach((tile) => {
+      const label = tile.querySelector(".tile__label");
+      const base = label.textContent.trim();
+      label.innerHTML = `<span class="tile__name"></span><span class="tile__caption t-body-small"></span>`;
+      label.querySelector(".tile__name").textContent = base;
+      const bg = document.createElement("span");
+      bg.className = "tile__bg";
+      bg.setAttribute("aria-hidden", "true");
+      tile.prepend(bg);
+
+      const pool = () => (tile.dataset.random === "any" ? [...SURPRISE.resource, ...SURPRISE.author] : SURPRISE[tile.dataset.random]);
+
+      const show = (item) => {
+        tile.href = item.href;
+        tile.setAttribute("aria-label", `${base}: ${item.title}`);
+        label.querySelector(".tile__caption").textContent = item.title;
+        if (!item.img) {
+          tile.classList.remove("tile--photo");
+          return;
+        }
+        const img = new Image();
+        img.onload = () => {
+          bg.style.backgroundImage = `url("${item.img}")`;
+          tile.classList.add("tile--photo");
+        };
+        img.src = item.img;
+      };
+
+      let current = pick(pool());
+      show(current);
+      tile._next = () => {
+        current = pick(pool(), current.href);
+        bg.classList.add("is-out");
+        setTimeout(() => {
+          show(current);
+          bg.classList.remove("is-out");
+        }, 350);
+      };
+    });
+
+    setInterval(() => {
+      if (document.hidden) return;
+      tiles.forEach((tile) => tile._next());
+    }, SURPRISE_MS);
   }
 
   /* ---------- Arranque ---------- */

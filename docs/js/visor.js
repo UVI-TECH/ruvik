@@ -25,6 +25,9 @@
       return `<iframe class="viewer-stage__frame" src="${esc(r.embedUrl)}" title="${esc(r.title)}" allowfullscreen loading="lazy"></iframe>`;
     }
     const v = r.viewer;
+    if (!r.url && !v.concepts.length && v.kind !== "video") {
+      return `<div class="viewer-card"><p class="viewer-card__eyebrow t-heading-eyebrow">${esc(r.platform)}</p><h2 class="t-heading-collection">${esc(r.title)}</h2><p class="viewer-card__text t-body-default">El enlace de este recurso está por confirmar.</p></div>`;
+    }
     const body =
       v.kind === "video"
         ? `<a class="video-placeholder" href="${esc(r.url)}"${external(r.url)}>
@@ -43,7 +46,17 @@
       </div>`;
   }
 
-  const files = r.files
+  const isPdf = (f) => /\.pdf($|#|\?)/i.test(f.href || "");
+  const actions = (f) =>
+    isPdf(f)
+      ? `<div class="file-card__actions">
+           <button class="btn-outline btn-outline--block t-label-button" type="button" data-pdf="${esc(f.href)}" data-pdf-title="${esc(f.title)}" aria-haspopup="dialog">Vista previa</button>
+           <a class="btn-outline btn-outline--block t-label-button" href="${esc(f.href)}" download>${esc(f.action)}</a>
+         </div>`
+      : `<a class="btn-outline btn-outline--block t-label-button" href="${esc(f.href)}"${f.external ? external(f.href) : f.href !== "#" ? " download" : ""}>${esc(f.action)}</a>`;
+
+  const files = r.files.length
+    ? r.files
     .map(
       (f) => `
       <li class="file-card">
@@ -54,10 +67,11 @@
             <p class="file-card__meta t-body-small">${esc(f.meta)}</p>
           </div>
         </div>
-        <a class="btn-outline btn-outline--block t-label-button" href="${esc(f.href)}"${f.external ? external(f.href) : f.href !== "#" ? " download" : ""}>${esc(f.action)}</a>
+        ${actions(f)}
       </li>`
     )
-    .join("");
+    .join("")
+    : `<li class="file-card"><p class="t-body-small">Este recurso aún no tiene archivos descargables.</p></li>`;
 
   const sheet = R.sheet(
     [
@@ -83,7 +97,7 @@
         <div class="viewer-main">
           <div class="viewer-toolbar">
             <span class="badge">${esc(r.type)}</span>
-            <a class="btn-outline t-label-button" href="${esc(r.url)}"${external(r.url)}>Abrir en ${esc(r.platform)}</a>
+            ${r.url ? `<a class="btn-outline t-label-button" href="${esc(r.url)}"${external(r.url)}>Abrir en ${esc(r.platform)}</a>` : ""}
             <button class="btn-outline t-label-button" type="button" data-fullscreen>Pantalla completa</button>
           </div>
           <div class="viewer-stage" id="vista-previa" role="region" aria-label="Vista previa del recurso">
@@ -118,4 +132,57 @@
       fullscreen.textContent = document.fullscreenElement ? "Salir de pantalla completa" : "Pantalla completa";
     });
   }
+  /* ---------- Vista previa de PDF ----------
+     Modal con el PDF incrustado; Esc, clic fuera y foco atrapado como en la búsqueda. */
+  const dlg = document.createElement("div");
+  dlg.className = "pdf-modal";
+  dlg.hidden = true;
+  dlg.innerHTML = `
+    <div class="pdf-modal__backdrop" data-pdf-close></div>
+    <div class="pdf-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="pdf-title">
+      <div class="pdf-modal__top">
+        <h2 class="t-heading-section" id="pdf-title"></h2>
+        <button class="btn-outline t-label-button" type="button" data-pdf-close>Cerrar</button>
+      </div>
+      <iframe class="pdf-modal__frame" title="Vista previa del PDF"></iframe>
+      <div class="pdf-modal__bottom">
+        <p class="t-body-small">¿No se ve el documento? Descárgalo para abrirlo en tu equipo.</p>
+        <a class="btn-cta btn-cta--on-light t-label-cta" href="#" download>Descargar PDF</a>
+      </div>
+    </div>`;
+  document.body.appendChild(dlg);
+  const frame = dlg.querySelector("iframe");
+  const closeBtn = dlg.querySelector(".pdf-modal__top button");
+  let opener = null;
+
+  const FOCUSABLE = 'a[href], button:not([disabled])';
+  function onKey(e) {
+    if (e.key === "Escape") { e.preventDefault(); closePdf(); return; }
+    if (e.key !== "Tab") return;
+    const items = [...dlg.querySelectorAll(FOCUSABLE)];
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+  function openPdf(btn) {
+    opener = btn;
+    dlg.querySelector("#pdf-title").textContent = btn.dataset.pdfTitle;
+    frame.src = btn.dataset.pdf + "#toolbar=0&navpanes=0";
+    const a = dlg.querySelector(".pdf-modal__bottom a");
+    a.href = btn.dataset.pdf;
+    dlg.hidden = false;
+    document.body.classList.add("is-locked");
+    document.addEventListener("keydown", onKey);
+    closeBtn.focus();
+  }
+  function closePdf() {
+    if (dlg.hidden) return;
+    dlg.hidden = true;
+    frame.src = "about:blank";
+    document.body.classList.remove("is-locked");
+    document.removeEventListener("keydown", onKey);
+    opener?.focus();
+  }
+  main.querySelectorAll("[data-pdf]").forEach((b) => b.addEventListener("click", () => openPdf(b)));
+  dlg.querySelectorAll("[data-pdf-close]").forEach((el) => el.addEventListener("click", closePdf));
 })();

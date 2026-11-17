@@ -512,7 +512,7 @@ a.tag:hover {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--space-24) var(--space-32);
-  align-items: start;
+  align-items: stretch; /* paneles de igual alto, sin huecos en blanco */
 }
 
 @media (min-width: 768px) {
@@ -836,3 +836,35 @@ a.tag:hover {
 .file-card .btn-outline:hover {
   background: var(--surface-lilac);
 }
+
+/* ---------- Encabezados: criterio único ----------
+   Títulos de sección (h2) en mayúsculas; el título del recurso (h1) y los de
+   tarjeta, como frase. Etiquetas y botones, siempre en mayúsculas. */
+.resource-hero__eyebrow,
+.cite .section-title__text { text-transform: uppercase; }
+.viewer-card .t-heading-collection { text-transform: none; }
+.badge { text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* ---------- Cómo citar ---------- */
+.cite { display: flex; flex-direction: column; gap: var(--space-12); }
+.cite__text {
+  max-width: 80ch; padding: var(--space-16) var(--space-20);
+  border-radius: var(--radius-14); background: var(--surface-lilac);
+  overflow-wrap: anywhere;
+}
+.cite__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-16); }
+
+/* ---------- Vista previa de PDF ---------- */
+.file-card__actions { display: flex; flex-direction: column; gap: var(--space-8); }
+.pdf-modal { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: var(--space-16); }
+.pdf-modal__backdrop { position: absolute; inset: 0; background: rgb(35 24 78 / 0.72); }
+.pdf-modal__dialog {
+  position: relative; display: flex; flex-direction: column; gap: var(--space-12);
+  width: min(960px, 100%); height: min(90vh, 900px); padding: var(--space-16);
+  border-radius: var(--radius-14); background: var(--neutral-white); color: var(--brand-navy);
+}
+.pdf-modal__top, .pdf-modal__bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-12); }
+.pdf-modal__frame { flex: 1; width: 100%; min-height: 0; border: 0; border-radius: var(--radius-14); background: var(--surface-lilac); }
+
+/* Portada del recurso: imagen entera con esquinas redondeadas */
+.resource-hero__photo { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-14); }

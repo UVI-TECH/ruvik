@@ -54,8 +54,9 @@ window.RUVIK.filters = [
     key: "coleccion",
     label: "Colección",
     options: [
-      ["coleccion-1", "Colección 1"],
-      ["coleccion-2", "Colección 2"],
+      ["diseno-y-narrativas-visuales", "Diseño y narrativas visuales"],
+      ["lenguaje-signos-y-cultura", "Lenguaje, signos y cultura"],
+      ["ciencia-tecnica-y-sociedad", "Ciencia, técnica y sociedad"],
     ],
   },
   {
@@ -67,6 +68,14 @@ window.RUVIK.filters = [
     ],
   },
 ];
+
+/* Colecciones de ejemplo (curadurías temáticas), armadas con los recursos actuales.
+   Nombres y descripciones por confirmar con el equipo. */
+window.RUVIK.collectionInfo = {
+  "diseno-y-narrativas-visuales": "Herramientas y estrategias para diseñar y comunicar con imágenes: del entorno de Illustrator a las narrativas centradas en el usuario y el diseño editorial.",
+  "lenguaje-signos-y-cultura": "Recursos para leer críticamente la lengua, los signos y el currículo: cómo el lenguaje, la publicidad y la educación construyen sentido y cultura.",
+  "ciencia-tecnica-y-sociedad": "Un recorrido por mercados, cálculo, problemáticas socioambientales y automatización: conocimiento científico y técnico en diálogo con la sociedad y el territorio.",
+};
 
 window.RUVIK.resources = [
   {
@@ -90,7 +99,7 @@ window.RUVIK.resources = [
       red: "activacion",
       facultad: "ciencias-sociales",
       formato: "imagen-interactiva",
-      coleccion: "coleccion-1",
+      coleccion: "diseno-y-narrativas-visuales",
       acceso: "abierto",
     },
     mosaic: ["violet", "yellow", "cyan", "mint", "violet", "orange", "pink", "yellow", "blue"],
@@ -146,7 +155,7 @@ window.RUVIK.resources = [
       red: "profundizacion",
       facultad: "ciencias-sociales",
       formato: "imagen-interactiva",
-      coleccion: "coleccion-1",
+      coleccion: "diseno-y-narrativas-visuales",
       acceso: "abierto",
     },
     mosaic: ["lilac", "pink", "mint", "violet", "yellow", "lilac", "cyan", "pink", "violet"],
@@ -199,7 +208,7 @@ window.RUVIK.resources = [
       red: "apoyo",
       facultad: "ciencias-sociales",
       formato: "video",
-      coleccion: "coleccion-2",
+      coleccion: "diseno-y-narrativas-visuales",
       acceso: "solo-uniajc",
     },
     mosaic: ["yellow", "blue", "orange", "cyan", "yellow", "pink", "orange", "blue", "yellow"],
@@ -241,7 +250,7 @@ window.RUVIK.resources = [
       red: "apoyo",
       facultad: "educacion",
       formato: "imagen-interactiva",
-      coleccion: "coleccion-1",
+      coleccion: "lenguaje-signos-y-cultura",
       acceso: "abierto",
     },
     mosaic: ["mint", "pink", "blue", "yellow", "cyan", "violet", "orange", "lilac", "red-orange"],
@@ -254,6 +263,39 @@ window.RUVIK.resources = [
     files: [
       { title: "Recurso interactivo en Genially", meta: "Enlace externo", action: "Abrir recurso", href: "https://view.genially.com/6a3aac2d02e695dd88c89468", external: true, icon: ["violet", ""] },
     ],
+  },
+  {
+    id: "una-mirada-critica-al-curriculo",
+    title: "Una mirada crítica al currículo",
+    type: "Imagen interactiva",
+    format: "Genially",
+    platform: "Genially",
+    duration: "No aplica",
+    year: 2026,
+    published: "2026-10-28",
+    faculty: "Facultad de Educación Virtual y a Distancia",
+    program: "Licenciatura en Educación Infantil y Licenciatura en Ciencias del Deporte y la Educación Física",
+    subject: "Currículo",
+    project: "Proceso DEDA",
+    advisor: { role: "Asesor", name: "Por confirmar" },
+    ai: { level: "Nivel 3", note: "" },
+    url: "",
+    embedUrl: "",
+    facets: {
+      red: "apoyo",
+      facultad: "educacion",
+      formato: "imagen-interactiva",
+      coleccion: "lenguaje-signos-y-cultura",
+      acceso: "abierto",
+    },
+    mosaic: ["pink", "yellow", "cyan", "mint", "violet", "orange", "lilac", "blue", "red-orange"],
+    synopsis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sinopsis por confirmar: la ficha de este recurso aún no está en el Excel.",
+    tags: [],
+    objective: "Objetivo pedagógico por confirmar.",
+    usage: "Uso del recurso por confirmar.",
+    author: null,
+    viewer: { kind: "concepts", intro: "", concepts: [] },
+    files: [],
   },
   {
     id: "descifrando-la-publicidad-una-mirada-semiotica-al-mensaje-y",
@@ -276,7 +318,7 @@ window.RUVIK.resources = [
       red: "profundizacion",
       facultad: "administracion",
       formato: "infografia",
-      coleccion: "coleccion-2",
+      coleccion: "lenguaje-signos-y-cultura",
       acceso: "abierto",
     },
     mosaic: ["yellow", "violet", "mint", "orange", "blue", "pink", "cyan", "red-orange", "lilac"],
@@ -317,7 +359,7 @@ window.RUVIK.resources = [
       red: "aplicacion",
       facultad: "administracion",
       formato: "infografia",
-      coleccion: "coleccion-1",
+      coleccion: "ciencia-tecnica-y-sociedad",
       acceso: "abierto",
     },
     mosaic: ["cyan", "orange", "violet", "pink", "mint", "yellow", "lilac", "blue", "red-orange"],
@@ -352,7 +394,7 @@ window.RUVIK.resources = [
       red: "evaluacion",
       facultad: "ciencias-basicas",
       formato: "infografia",
-      coleccion: "coleccion-2",
+      coleccion: "ciencia-tecnica-y-sociedad",
       acceso: "abierto",
     },
     mosaic: ["pink", "mint", "yellow", "blue", "orange", "cyan", "violet", "red-orange", "lilac"],
@@ -387,7 +429,7 @@ window.RUVIK.resources = [
       red: "activacion",
       facultad: "ingenieria",
       formato: "infografia",
-      coleccion: "coleccion-1",
+      coleccion: "ciencia-tecnica-y-sociedad",
       acceso: "abierto",
     },
     mosaic: ["lilac", "yellow", "red-orange", "cyan", "pink", "mint", "blue", "violet", "orange"],
@@ -422,7 +464,7 @@ window.RUVIK.resources = [
       red: "apoyo",
       facultad: "ingenieria",
       formato: "linea-de-tiempo",
-      coleccion: "coleccion-2",
+      coleccion: "ciencia-tecnica-y-sociedad",
       acceso: "abierto",
     },
     mosaic: ["orange", "blue", "mint", "violet", "yellow", "pink", "red-orange", "cyan", "lilac"],
@@ -437,3 +479,22 @@ window.RUVIK.resources = [
     ],
   },
 ];
+
+/* Portadas (capturas de cada recurso, 16:9, optimizadas en WebP) */
+(() => {
+  const covers = {
+    "entorno-adobe-illustrator": "1",
+    "narrativas-que-conectan": "2",
+    "que-es-el-diseno-editorial": "3",
+    "el-diccionario-personal-por-que-hablar-una-lengua-es-tomar-u": "4",
+    "una-mirada-critica-al-curriculo": "5",
+    "descifrando-la-publicidad-una-mirada-semiotica-al-mensaje-y": "6",
+    "mercados-emergentes-y-digitales": "7",
+    "limites-sin-misterio-una-mirada-visual-al-calculo": "8",
+    "problemas-socioambientales-contemporaneos": "9",
+    "diseno-y-aplicacion-de-circuitos-neumaticos-e-hidraulicos": "10",
+  };
+  window.RUVIK.resources.forEach((r) => {
+    if (covers[r.id]) r.cover = `assets/img/recursos/${covers[r.id]}.webp`;
+  });
+})();
