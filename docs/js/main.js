@@ -212,7 +212,9 @@
   };
 
   /* Cada tarjeta muestra la portada del recurso (o del recurso del autor) y
-     cambia sola cada 45 s; el enlace y la etiqueta accesible acompañan a la imagen. */
+     cambia sola cada 45 s; el enlace y la etiqueta accesible acompañan a la imagen.
+     WCAG 2.2.2: botón para pausar/reanudar, pausa mientras el cursor o el foco
+     están en las tarjetas, y sin rotación automática con movimiento reducido. */
   const SURPRISE_MS = 45000;
 
   function initSurprise(root) {
@@ -261,8 +263,37 @@
       };
     });
 
+    if (!tiles.length) return;
+
+    const section = root;
+    const toggle = root.querySelector("[data-surprise-toggle]");
+    const sub = root.querySelector("#sorpresa-sub");
+    let paused = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let hovering = false;
+    let focused = false;
+
+    const render = () => {
+      if (!toggle) return;
+      toggle.hidden = false;
+      toggle.setAttribute("aria-pressed", String(paused));
+      toggle.textContent = paused ? "Reanudar" : "Pausar";
+      if (sub) sub.textContent = paused ? "Cambio automático en pausa" : "Cambia al azar cada 45 segundos";
+    };
+
+    toggle?.addEventListener("click", () => {
+      paused = !paused;
+      render();
+    });
+    section.addEventListener("mouseenter", () => (hovering = true));
+    section.addEventListener("mouseleave", () => (hovering = false));
+    section.addEventListener("focusin", () => (focused = true));
+    section.addEventListener("focusout", (e) => {
+      if (!section.contains(e.relatedTarget)) focused = false;
+    });
+    render();
+
     setInterval(() => {
-      if (document.hidden) return;
+      if (document.hidden || paused || hovering || focused) return;
       tiles.forEach((tile) => tile._next());
     }, SURPRISE_MS);
   }

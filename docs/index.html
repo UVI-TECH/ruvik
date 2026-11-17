@@ -139,7 +139,10 @@
       <section class="surprise" id="sorpresa" aria-labelledby="sorpresa-title">
         <div class="surprise__heading">
           <h2 class="t-heading-section" id="sorpresa-title">Contenido sorpresa</h2>
-          <p class="surprise__sub t-body-small">Se muestra al azar cada visita</p>
+          <div class="surprise__row">
+            <p class="surprise__sub t-body-small" id="sorpresa-sub">Cambia al azar cada 45 segundos</p>
+            <button class="surprise__toggle t-body-small" type="button" aria-pressed="false" aria-describedby="sorpresa-sub" data-surprise-toggle hidden>Pausar</button>
+          </div>
         </div>
         <div class="surprise__tiles">
           <a class="tile tile--violet" href="#" data-random="any">

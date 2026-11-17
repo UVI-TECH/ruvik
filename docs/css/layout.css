@@ -286,6 +286,36 @@
   color: var(--neutral-text-secondary);
 }
 
+/* Fila subtítulo + botón de pausa del contenido sorpresa (WCAG 2.2.2) */
+.surprise__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8) var(--space-12);
+}
+
+.surprise__toggle {
+  padding: var(--space-4) var(--space-12);
+  border: 1px solid var(--brand-violet);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--brand-navy);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+}
+
+.surprise__toggle:hover,
+.surprise__toggle[aria-pressed="true"] {
+  background: var(--brand-violet);
+  color: var(--neutral-white);
+}
+
+.surprise__toggle:focus-visible {
+  outline: 2px solid var(--brand-violet);
+  outline-offset: 2px;
+}
+
 .surprise__tiles {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
