@@ -63,6 +63,11 @@
         </div>
       </section>`;
 
+  /* Cita APA 7: Autor. (Año). Título [Tipo]. Sitio. URL */
+  const citeAuthor = r.author ? r.author.name : "Unidad Virtual de Innovación (UVI), UNICAMACHO";
+  const citeUrl = new URL(R.resourceUrl(r), location.href).href;
+  const citation = `${esc(citeAuthor)}. (${esc(r.year)}). <em>${esc(r.title)}</em> [${esc(r.type)}]. RUVIK, Banco de Recursos Educativos Digitales, Institución Universitaria Antonio José Camacho. <a class="link" href="${esc(citeUrl)}">${esc(citeUrl)}</a>`;
+
   const related = R.resources.filter((x) => x.id !== r.id);
   const shareMail = `mailto:recursosruvik@uniajc.edu.co?subject=${encodeURIComponent(`Experiencia de uso: ${r.title}`)}`;
 
@@ -73,7 +78,9 @@
       </div>
 
       <article class="resource-hero" aria-labelledby="recurso-title">
-        ${R.mosaic(r, { className: "resource-hero__image" })}
+        ${r.cover
+          ? `<img class="resource-hero__image resource-hero__photo" src="${esc(r.cover)}" width="1280" height="720" alt="Portada de ${esc(r.title)}">`
+          : R.mosaic(r, { className: "resource-hero__image" })}
         <div class="resource-hero__body">
           <p class="resource-hero__meta t-body-caption">${esc(R.typeLine(r))}</p>
           <h1 class="t-display-h2" id="recurso-title">${esc(r.title)}</h1>
@@ -105,6 +112,16 @@
         </section>
         ${author}
       </div>
+
+      <section class="page__section cite" aria-labelledby="cita-title">
+        ${R.sectionTitle("Cómo citar este recurso", { id: "cita-title", color: "mint", shape: "br" })}
+        <p class="t-body-small">Formato APA 7.ª edición. Revisa los datos antes de usarla en tu trabajo.</p>
+        <p class="cite__text t-body-default" id="cita-texto">${citation}</p>
+        <div class="cite__actions">
+          <button class="btn-outline t-label-button" type="button" data-copy-cite>Copiar cita</button>
+          <span class="t-body-small" role="status" aria-live="polite" data-copy-status></span>
+        </div>
+      </section>
 
       <section class="page__section" aria-labelledby="experiencias-title">
         ${R.sectionTitle("Experiencias de uso", { id: "experiencias-title" })}
@@ -161,6 +178,21 @@
     if (status.classList.contains("is-error")) {
       status.classList.remove("is-error");
       status.textContent = EMPTY;
+    }
+  });
+  const copyBtn = main.querySelector("[data-copy-cite]");
+  const copyStatus = main.querySelector("[data-copy-status]");
+  copyBtn?.addEventListener("click", async () => {
+    const text = document.getElementById("cita-texto").textContent.trim();
+    try {
+      await navigator.clipboard.writeText(text);
+      copyStatus.textContent = "Cita copiada";
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(document.getElementById("cita-texto"));
+      getSelection().removeAllRanges();
+      getSelection().addRange(range);
+      copyStatus.textContent = "Selecciona y copia con Ctrl+C";
     }
   });
 })();

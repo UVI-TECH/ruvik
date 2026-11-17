@@ -23,6 +23,17 @@
     "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
   ];
 
+  /* Créditos del área UVI: nombres de ejemplo hasta tener la lista real */
+  const CREDITS = [
+    ["Dirección del área", ["Jhon Doe"]],
+    ["Acompañamiento estratégico (Deck Lab)", ["Ana María Villar"]],
+    ["Coordinación académica", ["Jhon Doe", "Jhon Doe"]],
+    ["Diseño instruccional", ["Jhon Doe", "Jhon Doe"]],
+    ["Diseño gráfico y multimedia", ["Jhon Doe", "Jhon Doe"]],
+    ["Desarrollo y UX", ["Jhon Doe"]],
+    ["Asesoría docente", ["Jhon Doe", "Jhon Doe"]],
+  ];
+
   const ARROW = `<span class="arrow" aria-hidden="true">
       <img class="arrow__default" src="assets/icons/arrow.svg" width="22" height="22" alt="">
       <img class="arrow__hover" src="assets/icons/arrow-hover.svg" width="22" height="22" alt="">
@@ -44,14 +55,18 @@
     }));
   };
 
+  /* Collage: las portadas de la colección superpuestas, sin rejilla */
+  function collage(items) {
+    const covers = items.map((r) => r.cover).filter(Boolean).slice(0, 4);
+    return covers.map((src) => `<img src="${esc(src)}" alt="" loading="lazy">`).join("");
+  }
+
   function collectionCard(c) {
-    const cells = c.items.flatMap((r) => r.mosaic).slice(0, 8);
-    const grid = cells.map((color, i) => R.cell(color, ["", "bl", "", "tr", "tl", "", "br", ""][i])).join("");
     return `<li><a class="card-collection" href="colecciones.html?c=${esc(c.id)}">
-      <div class="card-collection__image mosaic" aria-hidden="true">${grid}</div>
+      <div class="card-collection__image collage collage--${Math.min(c.items.length, 4)}" aria-hidden="true">${collage(c.items)}</div>
       <div class="card-collection__text">
         <h3 class="card-collection__title t-heading-collection">${esc(c.title)}</h3>
-        <span class="card-collection__desc t-body-default">Lorem ipsum dolor sit amet consectetur</span>
+        <span class="card-collection__desc t-body-default">${esc((R.collectionInfo || {})[c.id] || "")}</span>
         <span class="t-body-small x-muted">${plural(c.items.length, "recurso", "recursos")}</span>
       </div></a></li>`;
   }
@@ -63,7 +78,7 @@
       document.title = "Colecciones · RUVIK";
       shell(`<section class="page__section">
           ${R.sectionTitle("Colecciones", { level: 1, color: "pink", shape: "br" })}
-          <p class="t-body-default x-muted">Nombres y descripciones de ejemplo, pendientes de definir.</p>
+          <p class="t-body-default x-muted">Colecciones de ejemplo armadas con los recursos actuales; nombres y descripciones por confirmar.</p>
         </section>
         <ul class="x-grid">${list.map(collectionCard).join("")}</ul>`);
       return;
@@ -72,7 +87,7 @@
     shell(`${back("colecciones.html", "Todas las colecciones")}
       <section class="page__section">
         <h1 class="t-display-h1 x-title">${esc(c.title)}</h1>
-        <p class="t-body-lead x-prose">${esc(LOREM[0])}</p>
+        <p class="t-body-lead x-prose">${esc((R.collectionInfo || {})[c.id] || "")}</p>
         <p class="t-body-default x-muted">${plural(c.items.length, "recurso", "recursos")}</p>
       </section>
       <ul class="resource-grid">${c.items.map((r) => R.card(r)).join("")}</ul>`);
@@ -123,33 +138,54 @@
 
   /* ---------- ¿Qué es RUVIK? ---------- */
   function initAbout() {
+    const p = (t) => `<p class="t-body-default x-text">${t}</p>`;
+    const section = (id, title, color, shape, body) => `<section class="page__section" aria-labelledby="${id}-t" id="${id}">
+        ${R.sectionTitle(title, { id: `${id}-t`, color, shape })}
+        ${body}
+      </section>`;
     const steps = [
-      ["Busca", "Encuentra recursos por palabra, tipo, facultad o programa."],
+      ["Explora", "Navega libremente por colecciones y curadurías, o busca directo con la búsqueda avanzada."],
       ["Usa", "Abre el recurso, revisa la guía de uso y descarga los materiales."],
-      ["Comparte", "Cuenta cómo lo usaste y propón nuevos recursos."],
+      ["Comparte", "Cuenta cómo lo usaste y conversa en los comentarios de cada recurso."],
     ];
     const who = [
-      ["Estudiantes", "Consultan recursos para aprender a su ritmo."],
-      ["Profes", "Reutilizan recursos en clase y comparten experiencias."],
-      ["Creadores", "Publican sus recursos con su autoría y su ficha técnica."],
+      ["Profesores", "Encuentran, reutilizan y adaptan recursos, y comparten sus experiencias de creación y uso."],
+      ["Estudiantes", "Consultan recursos para aprender y explorar según su contexto y sus necesidades."],
+      ["Comunidad interesada", "Personas de dentro y fuera de la institución interesadas en la educación y en las prácticas pedagógicas."],
     ];
     const cards = (items, numbered) =>
-      items.map(([t, p], i) => `<li class="panel">${numbered ? `<span class="x-step t-heading-collection">0${i + 1}</span>` : ""}
-        <h3 class="t-body-card-title">${t}</h3><p class="t-body-default">${p}</p></li>`).join("");
+      items.map(([t, x], i) => `<li class="panel">${numbered ? `<span class="x-step t-heading-collection">0${i + 1}</span>` : ""}
+        <h3 class="t-body-card-title">${t}</h3><p class="t-body-default">${x}</p></li>`).join("");
+
     shell(`<section class="x-about">
         <p class="t-heading-eyebrow x-eyebrow">RUVIK</p>
         <h1 class="t-display-h1 x-title">¿Qué es RUVIK?</h1>
-        <p class="t-body-lead x-prose">Un ecosistema digital para organizar, consultar, compartir y reutilizar recursos educativos.</p>
-        <p class="t-body-default x-prose x-muted">${esc(LOREM[0])}</p>
+        <p class="t-body-lead x-prose">Ruvik es el Banco de Recursos Educativos Digitales de la Universidad Antonio José Camacho (UNICAMACHO).</p>
+        <p class="t-body-default x-prose x-muted">Su objetivo es reunir, clasificar, curar y poner a disposición de la comunidad educativa institucional y externa un conjunto amplio de recursos educativos, tanto abiertos como cerrados, que fortalezcan los procesos de enseñanza, aprendizaje, investigación e innovación pedagógica.</p>
         <a class="btn-cta btn-cta--on-light t-label-cta" href="busqueda.html">Explorar recursos</a>
       </section>
+      ${section("abierto-cerrado", "Un banco abierto y cerrado", "cyan", "tl", `<div class="x-steps">
+        <div class="panel"><h3 class="t-body-card-title">Componente abierto</h3><p class="t-body-default">Promueve el acceso libre al conocimiento con Recursos Educativos Abiertos (REA): se pueden consultar, descargar, reutilizar y adaptar bajo licencias abiertas, en favor de la democratización del saber y la proyección social de UNICAMACHO.</p></div>
+        <div class="panel"><h3 class="t-body-card-title">Componente cerrado</h3><p class="t-body-default">Centraliza Recursos Educativos Digitales de uso interno, diseñados por expertos asociados y validados con los saberes, macrosaberes y lineamientos pedagógicos institucionales, para garantizar pertinencia, calidad y coherencia curricular.</p></div>
+      </div>`)}
+      ${section("experiencia", "Experiencia y comunidad", "orange", "bl", p("Ruvik no es solo un repositorio: es una experiencia que articula recursos, personas y prácticas educativas. Está dirigido a profesores, estudiantes y demás personas interesadas en la educación, y busca que los recursos puedan explorarse, usarse, compartirse y apropiarse según las necesidades de cada contexto.") + p("Es el punto de partida para construir, poco a poco, una comunidad en torno al conocimiento: promueve la circulación y reutilización de los recursos, el intercambio entre sus participantes y la creación de nuevos conocimientos y prácticas pedagógicas. Así, los recursos no solo se conservan: se activan, circulan y adquieren nuevos sentidos."))}
+      ${section("identidad", "Identidad", "pink", "br", p("Su nombre evoca el cubo de Rubik: un rompecabezas de colores vibrantes cuya estructura, aparentemente simple, se compone de piezas que se reorganizan mediante el movimiento y la combinación. La identidad visual de Ruvik se construye alrededor de la geometría, la lógica, la articulación y la modularidad, con una imagen contemporánea y organizada, propia de una Smart University, pero cercana, amable y dinámica.") + p("Ese es su espíritu: mover, explorar, combinar, transformar y crear nuevas posibilidades. Ruvik parte de una estructura organizada, pero flexible y abierta a múltiples configuraciones, como una comunidad y un banco de recursos en permanente construcción."))}
+      ${section("uso-critico", "Creación, apropiación y uso crítico de las tecnologías", "violet", "tr", p("Además de reunir y cuidar los recursos, Ruvik promoverá su creación con actividades, talleres y laboratorios para que profesores y profesoras desarrollen sus propios recursos educativos, y ofrecerá herramientas y orientaciones para evaluarlos, con criterios de calidad reconocidos internacionalmente y ajustados al contexto local.") + p("Promoverá un uso crítico, creativo y responsable de las tecnologías, y el diálogo entre lo digital y lo análogo, entre lo tecnológico y lo material, con las personas, sus contextos y sus territorios en el centro.") + p("Frente a la inteligencia artificial, en particular la generativa, mantendrá una posición activa, crítica y reflexiva: reconocer sus aportes, pero también sus riesgos, limitaciones y usos inadecuados. Para ello consulta a la comunidad y toma como referente una escala de cinco niveles de uso de la IA (Perkins, Furze, Roe y MacVaugh, 2024, <a class=\"link\" href=\"https://doi.org/10.53761/q3azde36\" target=\"_blank\" rel=\"noopener\">doi.org/10.53761/q3azde36</a>)."))}
       <section class="page__section" aria-labelledby="como-t">
-        ${R.sectionTitle("Cómo funciona", { id: "como-t", color: "cyan", shape: "tl" })}
+        ${R.sectionTitle("Cómo funciona", { id: "como-t", color: "mint", shape: "tl" })}
         <ol class="x-steps">${cards(steps, true)}</ol>
       </section>
       <section class="page__section" aria-labelledby="quien-t">
         ${R.sectionTitle("A quién sirve", { id: "quien-t", color: "orange", shape: "bl" })}
         <ul class="x-steps">${cards(who, false)}</ul>
+      </section>
+      <section class="page__section" aria-labelledby="quienes-t" id="quienes-somos">
+        ${R.sectionTitle("Quiénes somos", { id: "quienes-t", color: "violet", shape: "tr" })}
+        <p class="t-body-default x-prose">Créditos del área UVI (Unidad Virtual de Innovación) de UNICAMACHO, con el apoyo del Eje de Innovación Educativa y el acompañamiento estratégico del Deck Lab. Los nombres de ejemplo se reemplazarán por los reales.</p>
+        <ul class="x-credits">${CREDITS.map(([role, names]) => `<li class="panel">
+            <h3 class="t-body-card-title">${role}</h3>
+            <ul class="x-credit-list">${names.map((n) => `<li><span class="x-initials" aria-hidden="true">${n.split(" ").map((w) => w[0]).join("").slice(0, 2)}</span><span class="t-body-default">${n}</span></li>`).join("")}</ul>
+          </li>`).join("")}</ul>
       </section>`);
   }
 

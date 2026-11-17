@@ -35,8 +35,16 @@
   R.cell = (color, shape = "") =>
     `<span class="cell c-${R.esc(color)}${shape ? ` cell--${shape}` : ""}"></span>`;
 
-  /* Mosaico del recurso: 3 filas (imagen completa) o 1 (tarjetas) */
+  /* Mosaico del recurso: 3 filas (imagen completa) o 1 (tarjetas).
+     Con portada (r.cover) se usa la foto cortada en la misma rejilla y formas. */
   R.mosaic = (r, { rows = 3, className = "" } = {}) => {
+    if (r.cover) {
+      const cells = SHAPES.map(
+        (shape, i) =>
+          `<span class="cell${shape ? ` cell--${shape}` : ""}" style="background-image:url('${R.esc(r.cover)}');background-position:${(i % 3) * 50}% ${Math.floor(i / 3) * 50}%"></span>`
+      ).join("");
+      return `<div class="mosaic mosaic--photo ${className}" aria-hidden="true">${cells}</div>`;
+    }
     const cells = r.mosaic.slice(0, rows * 3).map((color, i) => R.cell(color, SHAPES[i])).join("");
     return `<div class="mosaic ${className}" aria-hidden="true">${cells}</div>`;
   };
@@ -51,7 +59,9 @@
   R.card = (r, { headingLevel = 3 } = {}) => `
     <li>
       <a class="card-news card-resource" href="${R.resourceUrl(r)}">
-        ${R.mosaic(r, { rows: 1, className: "card-news__image" })}
+        ${r.cover
+          ? `<img class="card-news__image card-news__photo" src="${R.esc(r.cover)}" width="1280" height="720" loading="lazy" alt="">`
+          : R.mosaic(r, { rows: 1, className: "card-news__image" })}
         <div class="card-resource__text">
           <p class="card-resource__meta t-body-small">${R.esc(r.type)}</p>
           <div class="card-news__row">

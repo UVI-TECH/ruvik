@@ -32,6 +32,21 @@
   gap: var(--mosaic-gap, var(--space-4));
 }
 
+/* Mosaico con foto: la portada se corta en la rejilla 3x3 del cubo y cada
+   trozo conserva la esquina redondeada de su celda (formas de render.js).
+   Las 9 celdas de 16:9 recomponen la imagen completa en 16:9. */
+.mosaic--photo {
+  --mosaic-cols: 3;
+  --mosaic-cell: 1fr;
+}
+
+.mosaic--photo .cell {
+  aspect-ratio: 16 / 9;
+  background-color: var(--surface-mosaic);
+  background-repeat: no-repeat;
+  background-size: 300% 300%;
+}
+
 /* ---------- Header/Button ---------- */
 .header-btn {
   display: inline-flex;
@@ -647,3 +662,55 @@ button.menu__link {
     animation: search-in var(--duration-fast) var(--ease);
   }
 }
+
+/* Portada en tarjetas: imagen entera con esquinas redondeadas, sin rejilla */
+.card-news__photo { border-radius: var(--radius-14); background: var(--surface-mosaic); }
+
+/* Contenido sorpresa con portada: la imagen llena la tarjeta (conserva su forma)
+   y un velo navy mantiene legible el texto. */
+.tile { position: relative; isolation: isolate; }
+.tile__bg {
+  position: absolute; inset: 0; z-index: -2;
+  background: center / cover no-repeat;
+  transition: opacity 350ms var(--ease);
+}
+.tile__bg.is-out { opacity: 0; }
+.tile--photo { color: var(--neutral-white); text-shadow: 0 1px 6px rgb(35 24 78 / 0.55); }
+.tile--photo::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgb(35 24 78 / 0.82), rgb(35 24 78 / 0.62) 55%, rgb(35 24 78 / 0.82));
+}
+.tile__label { display: flex; flex-direction: column; gap: var(--space-4); }
+.tile__caption { font-weight: var(--fw-regular); opacity: 0.95; }
+.tile__caption:empty { display: none; }
+.tile--yellow .tile__caption, .tile--mint .tile__caption {
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+@media (prefers-reduced-motion: reduce) { .tile__bg { transition: none; } }
+
+/* Colecciones: collage de portadas superpuestas, con esquinas redondeadas y
+   sin rejilla. Al pasar el cursor se abren en abanico y se enderezan. */
+.collage {
+  position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden;
+  border-radius: var(--radius-14); background: var(--surface-mosaic);
+}
+.collage img {
+  position: absolute; width: 52%; aspect-ratio: 16 / 9; object-fit: cover;
+  border-radius: 12px; box-shadow: 0 6px 18px rgb(35 24 78 / 0.28);
+  transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--r, 0deg));
+  transition: transform 450ms var(--ease);
+}
+.collage--3 img:nth-child(1) { left: 4%;  top: 6%;  --r: -4deg; }
+.collage--3 img:nth-child(2) { left: 44%; top: 10%; --r: 3deg; }
+.collage--3 img:nth-child(3) { left: 22%; top: 42%; --r: -1.5deg; z-index: 1; }
+.collage--4 img:nth-child(1) { left: 3%;  top: 5%;  --r: -4deg; width: 48%; }
+.collage--4 img:nth-child(2) { left: 48%; top: 4%;  --r: 3deg;  width: 48%; }
+.collage--4 img:nth-child(3) { left: 8%;  top: 44%; --r: -2deg; width: 48%; z-index: 1; }
+.collage--4 img:nth-child(4) { left: 46%; top: 46%; --r: 4deg;  width: 48%; z-index: 1; }
+.card-collection:hover .collage img:nth-child(odd),
+.card-collection:focus-visible .collage img:nth-child(odd) { --x: -4%; --y: -3%; --r: -7deg; }
+.card-collection:hover .collage img:nth-child(even),
+.card-collection:focus-visible .collage img:nth-child(even) { --x: 4%; --y: -3%; --r: 7deg; }
+.card-collection:hover .collage--3 img:nth-child(3),
+.card-collection:focus-visible .collage--3 img:nth-child(3) { --x: 0; --y: 4%; --r: 0deg; }
+@media (prefers-reduced-motion: reduce) { .collage img { transition: none; } }
