@@ -17,11 +17,6 @@
   const slug = (s) => R.normalize(s).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 
-  const LOREM = [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-  ];
 
   /* Créditos del área UVI: nombres de ejemplo hasta tener la lista real */
   const CREDITS = [
@@ -189,13 +184,38 @@
       </section>`);
   }
 
-  /* ---------- Noticias y experiencias (contenido de ejemplo) ---------- */
+  /* ---------- Noticias y experiencias ---------- */
   const ARTICLES = [
-    { id: "noticia-1", type: "Noticia", title: "Lorem ipsum dolor sit amet consectetur" },
-    { id: "noticia-2", type: "Noticia", title: "Sed do eiusmod tempor incididunt ut labore" },
-    { id: "experiencia-1", type: "Experiencia", title: "Ut enim ad minim veniam quis nostrud" },
-    { id: "experiencia-2", type: "Experiencia", title: "Duis aute irure dolor in reprehenderit" },
+    {
+      id: "noticia-1", type: "Noticia",
+      title: "Primer laboratorio Ruvik de creación de recursos educativos digitales",
+      image: "noticia-laboratorio-ruvik.webp",
+      alt: "Una facilitadora presenta los criterios de calidad de los contenidos a un grupo de profesores en un auditorio.",
+      body: ["El mes pasado se desarrolló el primer laboratorio Ruvik de creación de recursos educativos digitales, con la participación de 20 profesores de la UNICAMACHO."],
+    },
+    {
+      id: "noticia-2", type: "Noticia",
+      title: "¡Seguimos sumando recursos! Llegaron 10 nuevos recursos",
+      image: "placeholder-noticia-2.jpg",
+      alt: "",
+      body: ["¡Seguimos sumando recursos! Llegaron 10 nuevos recursos a nuestra colección. Te invitamos a visitar nuestro banco para que explores estas alternativas y enriquezcas tus experiencias de aprendizaje."],
+    },
+    {
+      id: "experiencia-1", type: "Experiencia",
+      title: "Hellen Zamudio: crear recursos educativos dentro del proceso DEDA",
+      image: "experiencia-hellen-zamudio.webp",
+      alt: "Profesores reunidos alrededor de una mesa de trabajo mientras se proyecta la Guía de Recursos Educativos.",
+      body: ["La profesora Hellen Zamudio, del Departamento de Diseño, nos cuenta cómo ha sido su experiencia creando recursos educativos dentro del proceso DEDA."],
+    },
+    {
+      id: "experiencia-2", type: "Experiencia",
+      title: "El RED en el aula: la experiencia del profesor Jairo Castillo",
+      image: "experiencia-jairo-castillo.webp",
+      alt: "Un profesor explica un recurso educativo digital proyectado en pantalla ante un grupo de colegas.",
+      body: ["El profesor Jairo Castillo, de la Facultad de Ingenierías, nos comparte su experiencia haciendo uso del recurso educativo digital “Conoce los sistemas neumáticos y oleohidráulicos” en una de sus clases."],
+    },
   ];
+
 
   function initArticle() {
     const a = ARTICLES.find((x) => x.id === R.param("t")) || ARTICLES[0];
@@ -206,13 +226,13 @@
       <article class="x-article">
         <p class="t-heading-eyebrow x-eyebrow">${a.type}</p>
         <h1 class="t-display-h1 x-title">${esc(a.title)}</h1>
-        <img class="x-article__image" src="assets/img/placeholder-${a.id}.jpg" width="960" height="540" alt="">
-        <div class="x-prose t-body-lead">${LOREM.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
+        <img class="x-article__image" src="assets/img/${a.image}" width="960" height="540" alt="${esc(a.alt)}">
+        <div class="x-prose t-body-lead">${a.body.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
       </article>
       <section class="page__section" aria-labelledby="mas-t">
         ${R.sectionTitle(news ? "Más noticias" : "Más experiencias", { id: "mas-t", color: news ? "orange" : "cyan", shape: news ? "bl" : "tl" })}
         <ul class="card-list x-related">${more.map((x) => `<li><a class="card-news" href="articulo.html?t=${x.id}">
-          <img class="card-news__image" src="assets/img/placeholder-${x.id}.jpg" width="960" height="540" loading="lazy" alt="">
+          <img class="card-news__image" src="assets/img/${x.image}" width="960" height="540" loading="lazy" alt="">
           <div class="card-news__row"><h3 class="card-news__title t-body-card-title">${esc(x.title)}</h3>${ARROW}</div></a></li>`).join("")}</ul>
       </section>`);
   }
